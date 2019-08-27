@@ -1,38 +1,91 @@
-// Normalize Styles
-@import '../../node_modules/normalize.css/normalize.css';
+// Reset Styles<% if (cssReset === 'ericmeyer') { %>
+@import 'node_modules/normalize.css/normalize';<% } %><% if (cssReset === 'normalize') { %>
+@import 'node_modules/reset-css/reset.css';<% } %>
+
+// Import Helpers
+@import "helpers/functions",
+        "helpers/vars",
+        "helpers/mixins",
+        "helpers/helpers";
+
+// Import Base
+@import "base/typography";
+
+// Import Layout
+@import "layout/base";
+
+// Import Vendors
+@import
+        // "node_modules/balloon-css/src/balloon",
+        // "vendors/balloon/custom",
+        // "vendors/hamburgers/settings",
+        "node_modules/hamburgers/dist/hamburgers.css",
+        // "vendors/air-datepicker/datepicker-config",
+        // "node_modules/air-datepicker/src/sass/cell",
+        // "node_modules/air-datepicker/src/sass/navigation",
+        // "node_modules/air-datepicker/src/sass/timepicker",
+        // "node_modules/air-datepicker/src/sass/datepicker",
+        // "node_modules/selectric/src/selectric",
+        // "vendors/selectric/custom",
+        // "vendors/tooltip.js/custom",
+        // "node_modules/tippy.js/dist/tippy"
+        // "vendors/sweetalert2/custom",
+        // "node_modules/slick-carousel/slick/slick.scss",
+        // "vendors/slick-carousel/custom-theme.scss",
+        "node_modules/badger-accordion/dist/badger-accordion.css",
+        "vendors/badger-accordion/custom";
 
 // Import Modules
-@import '../_modules/link/link';
+@import '../_modules/footer/footer',
+        '../_modules/header/header',
+        '../_modules/header/dropdown',
+        '../_modules/tabs/tabs';
+// yo:update -- component
 
-// Box sizing partial styles
-// Apply a natural box layout model to all elements
-*,
-*:before,
-*:after
-  -moz-box-sizing border-box
-  -webkit-box-sizing border-box
-  box-sizing border-box
+// Import Components
+@import "components/avatar",
+        "components/badge",
+        "components/breadcrumbs",
+        "components/button",
+        "components/checkbox",
+        "components/dropdown",
+        "components/horizontal-rule",
+        "components/icon",
+        "components/icons",
+        "components/input",
+        "components/keyframes",
+        "components/link",
+        "components/list",
+        "components/radio",
+        "components/search",
+        "components/select",
+        "components/socials",
+        "components/spinner",
+        "components/subscribe-input",
+        "components/textarea";
+
+// Import Pages
+// @import "pages/home/index";
 
 .yeogurt-info
-  text-align center
-  max-width 500px
-  margin-left auto
-  margin-right auto
+    text-align: center
+    max-width: 500px
+    margin-left: auto
+    margin-right: auto
+    img
+        margin: 0 auto
 
 .version
-  font-size 14px
-  font-family Menlo, Monaco, Consolas, "Courier New", monospace
-  position absolute
-  bottom 10px
-  right 10px
-
-.logo
-  margin-top 15px
+    font-size: 14px
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+    position: absolute
+    bottom: 10px
+    right: 10px
 
 // Styling on warning for users on IE7 or below
 .browsehappy
-  text-align center
-  margin 0
-  background #fff8e2
-  color #000
-  padding 0.5em 0
+    text-align: center
+    margin: 0
+    background: #fff8e2
+    color: #000
+    padding: 0.5em 0

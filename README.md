@@ -4,7 +4,7 @@
 
 # Yeogurt Generator [![Build Status](https://secure.travis-ci.org/larsonjj/generator-yeogurt.png?branch=master)](https://travis-ci.org/larsonjj/generator-yeogurt) [![NPM version](https://badge.fury.io/js/generator-yeogurt.png)](http://badge.fury.io/js/generator-yeogurt) [![Coverage Status](https://coveralls.io/repos/larsonjj/generator-yeogurt/badge.png)](https://coveralls.io/r/larsonjj/generator-yeogurt)
 
-A generator for creating static sites. Helps you harness the power of your favorite tools: [Jade](http://jade-lang.com/) or [Nunjucks](https://mozilla.github.io/nunjucks/), [Gulp](http://gulpjs.com), ES6/2015, and much more!
+A generator for creating static sites. Helps you harness the power of your favorite tools: [Pug](https://pugjs.org/) or [Nunjucks](https://mozilla.github.io/nunjucks/), [Gulp](http://gulpjs.com), ES6/2015, and much more!
 
 # Table of Contents
 
@@ -25,7 +25,7 @@ A generator for creating static sites. Helps you harness the power of your favor
 
 ### Included in every project
 - Preview server with [Browsersync](http://www.browsersync.io/)
-- Automated build process that includes: compilation of preprocessors (Jade, Sass, etc), minification of CSS and HTML, compression of Javascript, and optimization of images
+- Automated build process that includes: compilation of preprocessors (Pug, Sass, etc), minification of CSS and HTML, compression of Javascript, and optimization of images
 - [.editorconfig](http://editorconfig.org/) for consistent coding styles within text editors
 - [Sourcemaps](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/) for JavaScript and Stylesheets
 - JavaScript Linting with [ESLint](http://eslint.org/)
@@ -38,7 +38,7 @@ A generator for creating static sites. Helps you harness the power of your favor
 - [Less](http://lesscss.org/), [Sass](http://sass-lang.com/) (via [node-sass](https://github.com/andrew/node-sass)), or [Stylus](http://learnboost.github.io/stylus/) for Stylesheets
 - [Jasmine](http://jasmine.github.io/) or [Mocha](http://mochajs.org/) + [Chai](http://chaijs.com/) for JavaScript unit testing
 - [Karma](http://karma-runner.github.io/0.12/index.html) for running unit tests
-- [Jade](http://jade-lang.com/) or [Nunjucks](https://mozilla.github.io/nunjucks/) for templating
+- [Pug](https://pugjs.org/) or [Nunjucks](https://mozilla.github.io/nunjucks/) for templating
 
 
 ## Getting Started
@@ -48,7 +48,7 @@ This generator utilizes [Yeoman](http://yeoman.io/) and [Gulp](http://gulpjs.com
 There are a few dependencies that this project relies on:
 
 > NOTE: For OSX users
-> You may have some issues compiling code during installation of packages. Please install Xcode from App Store first. After Xcode is installed, 
+> You may have some issues compiling code during installation of packages. Please install Xcode from App Store first. After Xcode is installed,
 open Xcode and go to ***Preferences -> Download -> Command Line Tools -> Install*** to install command line tools.
 
 > NOTE: For Windows users
@@ -65,7 +65,7 @@ Once you have Node installed, make sure you have these tools by opening up a ter
 | `yo --version`  | at or above `v1.2.1`
 | `gulp -v` | `gulp-cli` at or above `v0.3.9`
 
-If you get any errors and/or you're version(s) are too low, you should run `npm install -g yo gulp`. 
+If you get any errors and/or you're version(s) are too low, you should run `npm install -g yo gulp`.
 This will install both tools and update them to their latest versions.
 
 
@@ -98,7 +98,7 @@ yo yeogurt --skip-install
 
 Follow all the prompts and choose what suits you most for the project you would like to create. When you finish with all of the prompts, your project scaffold will be created and all dependencies will be installed.
 
-> NOTE: If you used the `--skip-install` option, no dependencies will have been installed and your gulp tasks will NOT work. 
+> NOTE: If you used the `--skip-install` option, no dependencies will have been installed and your gulp tasks will NOT work.
 You will need to run `npm install` in your project's root directory in order to get started running automated tasks
 
 Once everything is installed, you will see a project structure like below:
@@ -111,12 +111,12 @@ Once everything is installed, you will see a project structure like below:
 |   ├── _data                  # JSON/YAML files that add data to templates
 |   ├── _images                # Images
 |   ├── _layouts               # Layout structure for app
-|   |   └── base.jade
+|   |   └── base.pug
 |   ├── _modules               # Reusable modules
 |   |   └── link
 |   |       ├── __tests__
 |   |       |   └── link.spec.js
-|   |       ├── link.jade
+|   |       ├── link.pug
 |   |       ├── link.js
 |   |       └── link.scss
 |   ├── _styles               # Global styles, mixins, variables, etc
@@ -124,7 +124,7 @@ Once everything is installed, you will see a project structure like below:
 |   ├── _scripts              # Global scripts, base classes, etc
 |   |   └── main.js           # Main bootstrap file
 |   ├── fonts                 # Fonts (Example, will not be generated)
-|   ├── index.jade            # Homepage template
+|   ├── index.pug            # Homepage template
 |   ├── favicon.ico
 |   └── robots.txt
 ├── gulpfile.js               # Gulp task configuration
@@ -219,7 +219,7 @@ Ex: `main**.js` will process all files that start with `main` and end with `.js`
 ## Gulp Workflow
 
 ### `gulp --production`
-Runs [`gulp test`](#gulp-test) and builds out an optimized site through compilation of preprocessors (Jade, Sass, etc), minification of CSS and HTML, uglification of Javascript, and optimization of images.
+Runs [`gulp test`](#gulp-test) and builds out an optimized site through compilation of preprocessors (Pug, Sass, etc), minification of CSS and HTML, uglification of Javascript, and optimization of images.
 
 ### `gulp serve`
 Starts up a development server that watches files and automatically reloads them to the browser when a change is detected.
@@ -266,7 +266,7 @@ $ yo yeogurt:page contact
 Produces:
 
 ```
-src/contact/index.{jade,nunjucks}
+src/contact/index.{pug,nunjucks}
 ```
 
 #### Example #2: Specifying a layout
@@ -279,7 +279,7 @@ Produces:
 
 ```
 // Page that extends from 'src/_layouts/one-col'
-src/contact/index.{jade,nunjucks}
+src/contact/index.{pug,nunjucks}
 ```
 
 > NOTE: Pages will default to extending from `src/_layouts/base` if `--layout` is not provided
@@ -296,7 +296,7 @@ $ yo yeogurt:module header
 Produces:
 
 ```
-src/_modules/header/header.{jade,nunjucks}
+src/_modules/header/header.{pug,nunjucks}
 src/_modules/header/header.{scss,sass,less,styl}
 src/_modules/header/header.js
 src/_modules/header/__tests__/header.test.js
@@ -313,7 +313,7 @@ $ yo yeogurt:module link --atomic=atom
 Produces:
 
 ```
-src/_modules/atoms/link/link.{jade,nunjucks}
+src/_modules/atoms/link/link.{pug,nunjucks}
 src/_modules/atoms/link/link.{scss,sass,less,styl}
 src/_modules/atoms/link/link.js
 src/_modules/atoms/link/__tests__/link.test.js
@@ -330,7 +330,7 @@ $ yo yeogurt:module some/cool/link --atomic=atom
 Produces:
 
 ```
-src/_modules/atoms/some/cool/link/link.{jade,nunjucks}
+src/_modules/atoms/some/cool/link/link.{pug,nunjucks}
 src/_modules/atoms/some/cool/link/link.{scss,sass,less,styl}
 src/_modules/atoms/some/cool/link/link.js
 src/_modules/atoms/some/cool/link/__tests__/link.test.js
@@ -348,7 +348,7 @@ $ yo yeogurt:layout one-col
 Produces:
 
 ```
-src/_layouts/one-col.{jade,nunjucks}
+src/_layouts/one-col.{pug,nunjucks}
 ```
 
 #### Example #2: Specifying another layout to extend from
@@ -361,7 +361,7 @@ Produces:
 
 ```
 // Layout that extends from 'src/_layouts/one-col'
-src/contact/index.{jade,nunjucks}
+src/contact/index.{pug,nunjucks}
 ```
 
 > NOTE: Layouts will default to extending from 'src/_layouts/base'
@@ -369,7 +369,7 @@ src/contact/index.{jade,nunjucks}
 ## Guides
 
 ### Adding third-party libraries
-Odds are that you will need to add some third party libraries to your project at some point. 
+Odds are that you will need to add some third party libraries to your project at some point.
 To do so, it is strongly recommended that you install them using [NPM](http://npmjs.com/):
 
 ```
@@ -551,7 +551,7 @@ If the package is CSS, Sass, Less, or Stylus, you can follow the instructions in
 
 ### Data Files
 
-If you want to load global data into your templates (jade or nunjucks), you can add JSON/YAML files in `src/_data` folder.
+If you want to load global data into your templates (pug or nunjucks), you can add JSON/YAML files in `src/_data` folder.
 
 For example, add menu.json in `src/_data` folder:
 
@@ -566,7 +566,7 @@ For example, add menu.json in `src/_data` folder:
 
 And it will be added to the `site.data` object so it can be used like so:
 
-```jade
+```pug
 div
   h1= site.data.menu.name
 ```
@@ -585,7 +585,7 @@ Using data files, you can build a nice dashboard for your pages and modules.
 You can add an example dashboard to your Yeogurt project by going to this [Dashboard Example](https://github.com/larsonjj/yeogurt-dashboard-example) repository
 and following the instructions in the README.md.
 
-> NOTE: Example dashboard only works with Jade currently
+> NOTE: Example dashboard only works with Pug currently
 
 ### Using SVN
 If you plan on using SVN instead of Git, you will want to setup some default ignores to make sure you aren't committing extraneous/generated files to your codebase. To do this, adhere to the following steps:
@@ -608,7 +608,7 @@ Run the following command:
 svn propset svn:ignore -R -F .svnignore .
 ```
 
-This command will go through your newly created `.svnignore` file and set the specified files/folders to be ignored by SVN. 
+This command will go through your newly created `.svnignore` file and set the specified files/folders to be ignored by SVN.
 
 
 ## Common Issues
@@ -617,7 +617,7 @@ This command will go through your newly created `.svnignore` file and set the sp
 ##### Typical error message:
 > jQuery is not defined
 
-When adding third-party scripts, you should always import them to your `_scripts/main.js` file (See [Adding third-party libraries](#adding-third-party-libraries)). 
+When adding third-party scripts, you should always import them to your `_scripts/main.js` file (See [Adding third-party libraries](#adding-third-party-libraries)).
 However, if you [shimmed](#using-non-commonjs-modules-with-browserify-shim) the library/package to be global (ex: window.jQuery), ESLint will not know that your new library is defined globally. Thus, giving you errors.
 
 ##### Solution

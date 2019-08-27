@@ -1,16 +1,16 @@
 <% if (testFramework === 'mocha') { %>/*eslint no-unused-expressions:0 */
 <% } %>'use strict';
 
-var <%= _.classify(name) %> = require('../<%= name.toLowerCase() %>');
+var <%= className %> = require('../<%= name.toLowerCase() %>');
 
-describe('<%= _.classify(name) %> View', function() {
+describe('<%= className %> View', function() {
 
-  beforeEach(function() {
-    this.<%= _.camelize(name) %> = new <%= _.classify(name) %>();
-  });
+    beforeEach(function() {
+        this.<%= camelizedName %> = new <%= className %>();
+    });
 
-  it('Should run a few assertions', function() {
-    expect(this.<%= _.camelize(name) %>)<% if (testFramework === 'jasmine') { %>.toBeDefined()<% } else if (testFramework === 'mocha') { %>.to.exist<% } %>;
-  });
+    it('Should run a few assertions', function() {
+        expect(this.<%= camelizedName %>)<% if (testFramework === 'jasmine') { %>.toBeDefined()<% } else if (testFramework === 'mocha') { %>.to.exist<% } %>;
+    });
 
 });

@@ -1,124 +1,196 @@
 'use strict';
-var util = require('util');
-var yeoman = require('yeoman-generator');
-var path = require('path');
-var pjson = require(path.join(process.cwd(), './package.json'));
-var config = pjson.config;
-var directories = config.directories;
 
+const util = require('util');
+// const _ = require('lodash');
+const camelCase = require('camelcase');
+const Generator = require('yeoman-generator');
+const path = require('path');
+const pjson = require(path.join(process.cwd(), './package.json'));
+const config = pjson.config;
+const directories = config.directories;
 require('colors');
+const replace = require('replace-in-file');
+const slash = require('slash');
 
-var ModuleGenerator = module.exports = function ModuleGenerator() {
-  // By calling `NamedBase` here, we get the argument to the subgenerator call
-  // as `this.name`.
-  yeoman.generators.NamedBase.apply(this, arguments);
+class ModuleGenerator extends Generator {
+    constructor(args, opts) {
+        super(args, opts);
 
-  this.option('atomic', {
-    desc: 'Defines if this module is used in atomic design. ' +
-      'if so, allow it to be put in a atom, molecule, or organism folder',
-    type: Boolean,
-    required: false
-  });
+        this.option('atomic', {
+            desc: 'Defines if this module is used in atomic design. ' +
+            'if so, allow it to be put in a atom, molecule, or organism folder',
+            type: Boolean,
+            required: false
+        });
 
-  var fileJSON = this.config.get('config');
+        const fileJSON = this.config.get('config');
 
-  // options
-  this.projectName = fileJSON.projectName;
-  this.jsFramework = fileJSON.jsFramework;
-  this.singlePageApplication = fileJSON.singlePageApplication;
-  this.jsOption = fileJSON.jsOption;
-  this.jsPreprocessor = fileJSON.jsPreprocessor;
-  this.jsTemplate = fileJSON.jsTemplate;
-  this.cssOption = fileJSON.cssOption;
-  this.sassSyntax = fileJSON.sassSyntax;
-  this.testFramework = fileJSON.testFramework;
-  this.htmlOption = fileJSON.htmlOption;
+        // options
+        // this.projectName = fileJSON.projectName;
+        // this.jsFramework = fileJSON.jsFramework;
+        // this.singlePageApplication = fileJSON.singlePageApplication;
+        // this.jsOption = fileJSON.jsOption;
+        this.jsPreprocessor = fileJSON.jsPreprocessor;
+        // this.jsTemplate = fileJSON.jsTemplate;
+        this.cssOption = fileJSON.cssOption;
+        this.sassSyntax = fileJSON.sassSyntax;
+        this.testFramework = fileJSON.testFramework;
+        this.htmlOption = fileJSON.htmlOption;
 
-};
+        this.names = this.options._;
+        this.moduleFiles = [];
+        this.testFiles = [];
 
-util.inherits(ModuleGenerator, yeoman.generators.NamedBase);
+        this.stylesDir = config ?
+            path.join(directories.source, directories.styles) :
+            'src/_styles';
+    }
 
-// Prompts
-ModuleGenerator.prototype.ask = function ask() {
-  this.atomic = false;
-  if (this.options.atomic) {
-    this.atomic = this.options.atomic;
-  }
+    ask() {
+        this.atomic = false;
+        if (this.options.atomic) {
+            this.atomic = this.options.atomic;
+        }
 
-  var moduleDir = config ?
-    path.join(directories.source, directories.modules) :
-    'src' + '/_modules';
+        const moduleDir = config ?
+            path.join(directories.source, directories.modules) :
+            'src/_modules';
 
-  // Clean each part of the passed in path into usable file paths
-  // /each_sdf.SDF => /each_sdf/sdf
-  this.path = this.name.split('/')
-    .map(function(item) {
-      return item.toLowerCase();
-    }.bind(this))
-    .join('/');
+        this.names.forEach((name) => {
 
-  // Get the last piece of the path
-  // Ex: `button` of `cool/awesome/button`
-  this.name = this.name.split('/').slice(-1)[0];
+            this.path = name.toLowerCase();
+            // Get the last piece of the path
+            // Ex: `button` of `cool/awesome/button`
+            this.name = path.parse(name).name;
 
-  this.moduleFile = path.join(
-    moduleDir,
-    this.path,
-    this.name
-  );
+            this.moduleFiles.push(path.join(
+                moduleDir,
+                this.path,
+                this.name
+            ));
 
-  this.testFile = path.join(
-    moduleDir,
-    this.path,
-    'tests',
-    this.name
-  );
+            this.testFiles.push(path.join(
+                moduleDir,
+                this.path,
+                'tests',
+                this.name
+            ));
+        });
 
-  if (['atom', 'molecule', 'organism'].indexOf(this.atomic) > -1) {
-    this.moduleFile = path.join(
-      moduleDir,
-      this.atomic + 's',
-      this.path,
-      this.name
-    );
+        if (['atom', 'molecule', 'organism'].includes(this.atomic)) {
+            this.names.forEach((name) => {
+                this.path = name.toLowerCase();
+                this.name = path.parse(name).name;
 
-    this.testFile = path.join(
-      moduleDir,
-      this.atomic + 's',
-      this.path,
-      'tests',
-      this.name
-    );
-  }
-  else if (this.atomic) {
-    console.error('Error: Incorrect value given for --atomic option: '.red + this.atomic);
-    console.error('Error: Only "atom", "molecule", or "organism" are valid values.'.red);
-    this.abort = true;
-  }
-};
+                this.moduleFiles.push(path.join(
+                    moduleDir,
+                    this.atomic + 's',
+                    this.path,
+                    this.name
+                ));
 
-ModuleGenerator.prototype.files = function files() {
+                this.testFiles.push(path.join(
+                    moduleDir,
+                    this.atomic + 's',
+                    this.path,
+                    'tests',
+                    this.name
+                ));
+            });
+        }
+        else if (this.atomic) {
+            console.error('Error: Incorrect value given for --atomic option: '.red + this.atomic);
+            console.error('Error: Only "atom", "molecule", or "organism" are valid values.'.red);
+            this.abort = true;
+        }
+    }
 
-  if (this.abort) {
-    return;
-  }
+    files() {
+        let templates = [];
+        const names = this.names;
 
-  var htmlSuffix = (this.htmlOption === 'jade') ? '.jade' : '.nunjucks';
-  var jsSuffix = (this.jsPreprocessor === 'none') ? '.js' : '.es6.js';
-  var cssSuffix = _getCssSuffix(this.cssOption, this.sassSyntax);
+        if (this.abort) {
+            return;
+        }
 
-  this.template(('module' + htmlSuffix), (this.moduleFile + htmlSuffix));
-  this.template(('module' + jsSuffix), (this.moduleFile + '.js'));
-  this.template(('module.test' + jsSuffix), (this.testFile + '.test.js'));
-  this.template(('module.css'), (this.moduleFile + cssSuffix));
+        const htmlSuffix = (this.htmlOption === 'pug') ? '.pug' : '.nunjucks';
+        const jsSuffix = (this.jsPreprocessor === 'none') ? '.js' : '.es6.js';
+        const cssSuffix = _getCssSuffix(this.cssOption, this.sassSyntax);
 
-  function _getCssSuffix(cssOption, sassSyntax) {
-    var sassSuffix = (sassSyntax === 'sass') ? '.sass' : '.scss'
+        this.moduleFiles.forEach((file) => {
+            const name = path.parse(file).name;
 
-    var _result = '.less';
-    _result = (cssOption === 'sass') ? sassSuffix : _result;
-    _result = (cssOption === 'stylus') ? '.styl' : _result;
+            templates.push(
+                { from: 'module' + htmlSuffix, to: file + htmlSuffix, name },
+                { from: 'module' + jsSuffix, to: file + '.js', name },
+                { from: 'module.css', to: file + cssSuffix, name }
+            );
+        });
 
-    return _result;
-  }
-};
+        this.testFiles.forEach((file) => {
+            const name = path.parse(file).name;
+
+            templates.push({ from: 'module.test' + jsSuffix, to: file + '.test.js', name });
+        });
+
+        for (let file of templates) {
+            const camelizedName = camelCase(file.name);
+            this.fs.copyTpl(
+                this.templatePath(file.from),
+                this.destinationPath(file.to),
+                {
+                    layout: this.layout,
+                    name: file.name,
+                    className: camelizedName.charAt(0).toUpperCase() + camelizedName.slice(1),
+                    camelizedName: camelizedName,
+                    testFramework: this.testFramework
+                }
+            );
+
+        }
+
+        const replaceOptions = {
+            files: this.destinationPath(path.join(this.stylesDir, `main${cssSuffix}`)),
+            from: '// yo:update -- module',
+            to: createUpdateStr(this.names, directories)
+        };
+        replace(replaceOptions);
+
+        function _getCssSuffix(cssOption, sassSyntax) {
+            const sassSuffix = `.${sassSyntax}`;
+            let _result = '';
+
+            switch (cssOption) {
+                case 'sass':
+                    _result = sassSuffix;
+                    break;
+                case 'stylus':
+                    _result = '.styl';
+                    break;
+                default:
+                    _result = '.less';
+            }
+
+            return _result;
+        }
+        function createUpdateStr(names, dirs) {
+            let updateStr = '';
+
+            names.forEach((name, i, arr) => {
+                const filepath = name.toLowerCase();
+                const filename = path.parse(name).name;
+
+                const updatePath = path.join('../', dirs.modules, filepath, filename);
+                updateStr += `@import '${slash(updatePath)}';\n`;
+
+                if (i === arr.length - 1) {
+                    updateStr += '// yo:update -- module';
+                }
+            });
+
+            return updateStr;
+        }
+    }
+}
+
+module.exports = ModuleGenerator;

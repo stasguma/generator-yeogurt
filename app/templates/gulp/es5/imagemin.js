@@ -10,7 +10,11 @@ module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) 
 
   // Imagemin
   gulp.task('imagemin', function() {
-    return gulp.src(path.join(dirs.source, dirs.images, '**/*.{jpg,jpeg,gif,svg,png}'))
+      return gulp.src([
+          path.join(dirs.source, dirs.images, '**/*.{jpg,jpeg,gif,svg,png}'),
+          '!' + path.join(dirs.source, dirs.images, dirs.svgIconSprite, '*.svg'),
+          '!' + path.join(dirs.source, dirs.images, dirs.svgImgSprite, '*.svg')
+      ])
       .pipe(plugins.changed(dest))
       .pipe(gulpif(args.production, plugins.imagemin([
         plugins.imagemin.jpegtran({progressive: true}),

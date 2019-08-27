@@ -1,0 +1,26 @@
+{% from "../svg/svg.nunjucks" import icon-svg, img-svg %}
+
+header.header
+    .grid-container
+        .grid-x.align-justify.align-bottom
+            .cell.shrink
+                a.logo(href= '/')
+                    +img-svg({id: 'logo', __class: 'logo__svg'})
+            .cell.shrink
+                button.hamburger.hamburger--squeeze.header__hamburger.hide-for-large(type="button" class= 'js-hamburger')
+                    span.hamburger-box
+                        span.hamburger-inner
+                nav.navigation(class= 'js-navigation')
+                    ul.navigation__list
+                        li.navigation__item
+                            a.navigation__link Link
+                            .dd-content
+                                ul.dd-content__list
+                                    li.dd-content__item
+                                        a.dd-content__link(href= baseUrl + 'pages/link.html') Link
+                        li.navigation__item
+                            .input-search
+                                form
+                                    input.input-search__input.navigation__search-input(type= 'search' placeholder= 'Search' required)
+                                    button.btn.input-search__btn(type= 'submit')
+                                        +icon-svg({id: 'icon-search', __class: 'icon input-search__icon'})

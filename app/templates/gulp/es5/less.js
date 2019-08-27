@@ -3,6 +3,8 @@
 var path = require('path');
 var autoprefixer = require('autoprefixer');
 var gulpif = require('gulp-if');
+var colors = require('ansi-colors');
+var log = require('fancy-log');
 
 module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) {
   var dirs = config.directories;
@@ -21,7 +23,7 @@ module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) 
         ]
       }))
       .on('error', function(err) {
-        plugins.util.log(err);
+        log(err);
       })
       .on('error', plugins.notify.onError(config.defaultNotification))
       .pipe(plugins.postcss([autoprefixer({browsers: ['last 2 version', '> 5%', 'safari 5', 'ios 6', 'android 4']})]))

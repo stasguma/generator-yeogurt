@@ -1,32 +1,56 @@
 /**
- * Generate files specific to the root directory
- */
+* Generate files specific to the root directory
+*/
+const titleize = require('titleize');
 
 'use strict';
 
-var rootFiles = function rootFiles() {
-  // Create needed Directories
+const rootFiles = function rootFiles() {
+    // Create needed Directories
+    let templates = [];
+    let files = [];
 
-  // root (/)
-  if (this.jsPreprocessor === 'none') {
-    this.template('gulpfile.js', 'gulpfile.js');
-  }
-  else {
-    this.template('gulpfile.babel.js', 'gulpfile.babel.js');
-    this.template('.babelrc', '.babelrc');
-  }
-  this.template('_package.json', 'package.json');
-  this.template('README.md', 'README.md');
+    // root (/)
+    if (this.jsPreprocessor === 'none') {
+        templates.push({ from: 'gulpfile.js', to: 'gulpfile.js' });
+    }
+    else {
+        templates.push(
+            { from: 'gulpfile.babel.js', to: 'gulpfile.babel.js' },
+            { from: 'babel.config.js', to: 'babel.config.js' }
+        );
+    }
+    templates.push(
+        { from: '_package.json', to: 'package.json' },
+        { from: 'README.md', to: 'README.md' }
+    );
 
-  this.copy('gitignore', '.gitignore');
-  this.copy('gitattributes', '.gitattributes');
+    files.push(
+        { from: 'gitignore', to: '.gitignore' },
+        { from: 'gitattributes', to: '.gitattributes' },
 
-  this.copy('src/shared/robots.txt', 'src/robots.txt');
-  this.copy('src/shared/favicon.ico', 'src/favicon.ico');
+        { from: 'src/shared/robots.txt', to: 'src/robots.txt' },
+        { from: 'src/shared/favicon.ico', to: 'src/favicon.ico' },
 
-  this.copy('editorconfig', '.editorconfig');
-  this.template('eslintrc', '.eslintrc');
+        { from: 'editorconfig', to: '.editorconfig' },
 
+        { from: 'browserslistrc', to: '.browserslistrc' }
+    );
+    templates.push({ from: 'eslintrc', to: '.eslintrc' });
+
+    for (let file of files) {
+        this.fs.copy(
+            this.templatePath(file.from),
+            this.destinationPath(file.to)
+        );
+    }
+    for (let file of templates) {
+        this.fs.copyTpl(
+            this.templatePath(file.from),
+            this.destinationPath(file.to),
+            { ...this.answers, titleize, pkg: this.pkg }
+        );
+    }
 };
 
 module.exports = rootFiles;

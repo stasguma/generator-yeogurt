@@ -1,0 +1,16 @@
+extends ./<%= layout %>
+
+// Add extra stylesheets
+block append stylesheets
+
+block content
+    //- Provides layout level markup
+    .block1
+        block block1
+            p nothing
+    .block2
+        block block2
+            p nothing
+
+// Add extra scripts
+block append scripts

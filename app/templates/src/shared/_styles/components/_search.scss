@@ -1,0 +1,43 @@
+/*
+<div class="input-search">
+    <input type="search" placeholder="Search" class="input-search__input">
+    <button type="submit" class="btn input-search__btn">
+        <svg class="icon input-search__icon">
+            <use xlink:href="../../../images/sprite.svg#icon-search"></use>
+        </svg>
+    </button>
+</div>
+*/
+
+.input-search {
+    position: relative;
+    &__input {
+        appearance: none;
+        width: 100%;
+        padding: 3px 26px 3px 16px;
+        border: 2px solid $input-border-color;
+        background-color: $c--white;
+        color: $c--dark-gray;
+        // @include font(mukta, 16px);
+        @include mq(desktop) {
+            padding: 1px 26px 1px 10px;
+            // @include font(mukta, 13px);
+        };
+        &:focus {
+            border-color: $input-border-color-focus;
+            transition: border-color .15s;
+        }
+    }
+    &__btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 28px;
+        height: 100%;
+    }
+    &__icon {
+        width: 15px;
+        height: 15px;
+        fill: $c--dark-gray
+    }
+}

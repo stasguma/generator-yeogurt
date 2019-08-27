@@ -4,8 +4,15 @@
 {% block stylesheets %}{% endblock %}
 
 {% block layout %}
-<div class="layout-wrapper <%= name.toLowerCase() %>">
-  {% block <%= name.toLowerCase() %> %}{% endblock %}
+<div class="block1 %>">
+    {% block block1 %}
+        <p>nothing</p>
+    {% endblock %}
+</div>
+<div class="block2 %>">
+    {% block block2 %}
+        <p>nothing</p>
+    {% endblock %}
 </div>
 {% endblock %}
 

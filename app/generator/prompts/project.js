@@ -1,28 +1,24 @@
 /**
- * Generate Initial project information prompts
- */
+* Generate Initial project information prompts
+*/
 
 'use strict';
 
-var projectPrompts = function projectPrompts() {
-  if (this.existingConfig) {
-    return;
-  }
+const projectPrompts = async function projectPrompts() {
+    if (this.existingConfig) {
+        return;
+    }
+    
+    this.log('\n---- ' + 'Project Info'.red.underline + ' ----\n');
 
-  var cb = this.async();
+    const answers = await this.prompt([{
+        type: 'input',
+        name: 'projectName',
+        message: 'What would you like to' + ' name your project'.blue + '?',
+        default: 'Sample'
+    }]);
 
-  this.log('\n---- ' + 'Project Info'.red.underline + ' ----\n');
-
-  this.prompt([{
-    type: 'input',
-    name: 'projectName',
-    message: 'What would you like to' + ' name your project'.blue + '?',
-    default: 'Sample'
-  }], function(answers) {
     this.projectPrompts = answers;
-
-    cb();
-  }.bind(this));
 };
 
 module.exports = projectPrompts;

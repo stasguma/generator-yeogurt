@@ -18,12 +18,12 @@
     "afterEach": true<% } %>
   },
   "rules": {
-    "indent": [2, 2],
+    "indent": ["error", 4],
     "valid-jsdoc": 0,
     "brace-style": [1, "stroustrup"],
     "no-constant-condition": 1,
     "no-underscore-dangle": 0,
-    "no-use-before-define": 1,
+    "no-use-before-define": 0,
     "func-names": 0,
     "semi": [2, "always"],
     "no-new": 0,

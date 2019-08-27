@@ -9,6 +9,8 @@ var _ = require('lodash');
 var vsource = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gulpif = require('gulp-if');
+var colors = require('ansi-colors');
+var log = require('fancy-log');
 
 module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) {
   var dirs = config.directories;
@@ -39,8 +41,8 @@ module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) 
         var startTime = new Date().getTime();
         bundler.bundle()
           .on('error', function(err) {
-            plugins.util.log(
-              plugins.util.colors.red('Browserify compile error:'),
+            log(
+              colors.red('Browserify compile error:'),
               '\n',
               err.stack,
               '\n'
@@ -51,7 +53,11 @@ module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) 
           .pipe(vsource(entry))
           .pipe(buffer())
           .pipe(plugins.sourcemaps.init({loadMaps: true}))
-            .pipe(gulpif(args.production, plugins.uglify()))
+            .pipe(gulpif(args.production, plugins.uglify({
+                compress: {
+                    drop_console: true
+                }
+            })))
             .on('error', plugins.notify.onError(config.defaultNotification))
           .pipe(plugins.rename(function(filepath) {
             // Remove 'source' directory as well as prefixed folder underscores
@@ -64,16 +70,16 @@ module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) 
           .on('end', function() {
             var time = (new Date().getTime() - startTime) / 1000;
             console.log(
-              plugins.util.colors.cyan(entry)
+              colors.cyan(entry)
               + ' was browserified: '
-              + plugins.util.colors.magenta(time + 's'));
+              + colors.magenta(time + 's'));
             return browserSync.reload('*.js');
           });
       };
 
       if (!args.production) {
         bundler.on('update', rebundle); // on any dep update, runs the bundler
-        bundler.on('log', plugins.util.log); // output build logs to terminal
+        bundler.on('log', log); // output build logs to terminal
       }
       return rebundle();
     });

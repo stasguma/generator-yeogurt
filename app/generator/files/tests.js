@@ -1,19 +1,36 @@
 /**
- * Generate files specific to unit testing
- */
+* Generate files specific to unit testing
+*/
 
 'use strict';
 
-var testingFiles = function testingFiles() {
-  if (this.testFramework !== 'none') {
-    this.template('test/karma/karma.conf.js', 'karma.conf.js');
-    if (this.jsPreprocessor === 'none') {
-      this.template('src/shared/_modules/link/tests/link.test.js', 'src/_modules/link/tests/link.test.js');
+const testingFiles = function testingFiles() {
+    let templates = [];
+    if (this.testFramework !== 'none') {
+        templates.push({ from: 'test/karma/karma.conf.js', to: 'karma.conf.js' });
+        if (this.jsPreprocessor === 'none') {
+            templates.push(
+                { from: 'src/shared/_modules/footer/tests/footer.test.js', to: 'src/_modules/footer/tests/footer.test.js' },
+                { from: 'src/shared/_modules/header/tests/header.test.js', to: 'src/_modules/header/tests/header.test.js' },
+                { from: 'src/shared/_modules/tabs/tests/tabs.test.js', to: 'src/_modules/tabs/tests/tabs.test.js' }
+            );
+        }
+        else {
+            templates.push(
+                { from: 'src/shared/_modules/footer/tests/footer.test.es6.js', to: 'src/_modules/footer/tests/footer.test.js' },
+                { from: 'src/shared/_modules/header/tests/header.test.es6.js', to: 'src/_modules/header/tests/header.test.js' },
+                { from: 'src/shared/_modules/tabs/tests/tabs.test.es6.js', to: 'src/_modules/tabs/tests/tabs.test.js' }
+            );
+        }
     }
-    else {
-      this.template('src/shared/_modules/link/tests/link.test.es6.js', 'src/_modules/link/tests/link.test.js');
+
+    for (let file of templates) {
+        this.fs.copyTpl(
+            this.templatePath(file.from),
+            this.destinationPath(file.to),
+            { ...this.answers }
+        );
     }
-  }
 };
 
 module.exports = testingFiles;

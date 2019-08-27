@@ -1,0 +1,51 @@
+.accordion
+    &__header
+        border-top: 2px solid $c--dark-gray
+        &:last-of-type
+            border-bottom: 2px solid $c--dark-gray
+    &__trigger
+        display: flex
+        align-items: center
+        width: 100%
+        padding: 20px 20px 20px 0
+        text-align: left
+        transition: all ease-in-out .2s
+
+        border: none
+        outline: none
+        cursor: pointer
+        background: none
+        &[aria-expanded=true]
+            .accordion__trigger-title-symbol
+                &::after
+                    transform: translateX(-50%) rotateX(90deg)
+        &-title
+            color: $c--dark-gray
+            // font(mukta, 23px, 33px)
+        &-title-symbol
+            position: relative
+            flex: 0 0 auto
+            display: inline-block
+            width: 14px
+            height: 14px
+            margin-right: 20px
+            &::before, &::after
+                pseudo(inline-block, absolute)
+                background-color: $c--dark-gray
+                transition: .2s
+            &::before
+                top: 50%
+                transform: translateY(-50%)
+                width: 100%
+                height: 2px
+            &::after
+                left: 50%
+                transform: translateX(-50%)
+                width: 2px
+                height: 100%
+    &__panel
+        position: relative
+        transition: max-height ease-in-out 0.2s
+    &__panel-inner
+        padding: 20px 0 40px
+        color: $c--dark-gray

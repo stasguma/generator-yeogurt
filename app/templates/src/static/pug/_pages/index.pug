@@ -1,0 +1,13 @@
+extends ../_layouts/base
+
+block content
+  .container
+    .yeogurt-info
+      h1 Welcome to Yeogurt!
+      p.
+        Take a look at the
+        #[a(href='https://github.com/larsonjj/generator-yeogurt#yeogurt-generator---') documentation]
+        and start mixing up something awesome.
+      p
+        img(src= baseUrl + "images/yeogurt-swirl.png", width="75px")
+  code.version v<%= pkg.version %>

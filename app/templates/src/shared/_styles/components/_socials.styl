@@ -1,0 +1,25 @@
+// .socials.footer__socials
+//     a.socials__link(href= '#' target= '_blank')
+//         +icon-svg({id: 'facebook', __class: 'icon socials__icon'})
+
+.socials
+    display: flex
+    flex-flow: row wrap
+    justify-content: space-between
+    mq(desktop)
+        justify-content: flex-start
+    &__link
+        display: inline-block
+        width: 48px
+        height: 48px
+        padding: 12px 0
+        border-radius: 50%
+        background-color: $c--dark-gray
+        transition: .3s
+        &:hover
+            background-color: purple
+        & + &
+            mq(desktop)
+                margin-left: 35px
+    &__icon
+        fill: $c--white

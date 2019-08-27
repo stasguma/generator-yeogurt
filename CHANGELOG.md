@@ -56,7 +56,7 @@
 * Fixed readme typo for layouts
 * Updated nunjucks modules to work better and have configurable options via 'spec' object
 * Changed 'config' object to 'spec' to avoid naming conflict with global configuration in templates
-* Updated jade modules to use the &attributes functionality
+* Updated pug modules to use the &attributes functionality
 
 ### v1.3.3:
 #### date: 2015-9-27
@@ -116,7 +116,7 @@
 ### v1.2.3:
 #### date: 2015-8-17
 ##### changes:
-* Fixed data parsing for jade and nunjucks tasks
+* Fixed data parsing for pug and nunjucks tasks
 * Added Link module import for styles
 
 ### v1.2.2:
@@ -172,7 +172,7 @@
 ### v1.0.5:
 #### date: 2015-7-28
 ##### changes:
-* Fixed exiting out of gulp.watch on error for Jade, Nunjucks, and Browserify
+* Fixed exiting out of gulp.watch on error for Pug, Nunjucks, and Browserify
 
 ### v1.0.4:
 #### date: 2015-7-24
@@ -197,7 +197,7 @@
 * Fixed karma loading module when not using a test framework
 * Fixed issue with loading normalize.css within main.less
 * Fixed issue with loading normalize.css within main.styl
-* Fixed issue with loading jade on nunjucks projects
+* Fixed issue with loading pug on nunjucks projects
 
 ### v1.0.0:
 #### date: 2015-7-11
@@ -212,14 +212,14 @@
 * Updated folder structure to utilize a [Jekyll](http://jekyllrb.com/docs/structure/)-esque underscore prefixes.
   - Folders prefixed with an underscore (`_`) will not be copied over to build targets (ex. `_styles`).
   - Folders NOT prefixed with an underscore (`_`) WILL be copied over to build targets (Ex. `fonts/`).
-  - Jade/Nunjucks templates will not be copied over.
+  - Pug/Nunjucks templates will not be copied over.
 * Updated Karma to default to using Chrome as the default browser to launch when running tests.
 * Updated Node dependency to require `v0.12.0` and up.
 * Updated [LiveReload](http://livereload.com/) to instead use [BrowserSync](http://www.browsersync.io/).
 * Updated static site generators to the following:
-  - Page: Creates a new page within it's own folder (ex `contact/index.jade`). This created clean urls (ex: `localhost:3000/contact`).
-  - Module: Creates a new module within it's own folder (ex `_modules/newmodule/newmodule.jade`). Along with JavaScript, unit test, and stylesheet.
-  - Layout: Creates a new layout witin the layout folder (ex `_layouts/newlayout.jade`).
+  - Page: Creates a new page within it's own folder (ex `contact/index.pug`). This created clean urls (ex: `localhost:3000/contact`).
+  - Module: Creates a new module within it's own folder (ex `_modules/newmodule/newmodule.pug`). Along with JavaScript, unit test, and stylesheet.
+  - Layout: Creates a new layout witin the layout folder (ex `_layouts/newlayout.pug`).
 * Updated all sub-generator unit tests to be created within their own `tests` folder.
 * Updated all scripts to utilize [Babel](http://babeljs.io), which enables ES6 features out of the box.
 * Removed [Injector](https://github.com/klei/grunt-injector) and [Wiredep](https://github.com/stephenplusplus/grunt-wiredep) as debugging them for errors was difficult and confusing.
@@ -244,7 +244,7 @@
 ### v0.14.5:
 #### date: 2015-5-03
 ##### changes:
-* Fixed issue where Backbone view sub-generator was an unneeded `.jade` extension to JST namespace [#127](https://github.com/larsonjj/generator-yeogurt/issues/127)
+* Fixed issue where Backbone view sub-generator was an unneeded `.pug` extension to JST namespace [#127](https://github.com/larsonjj/generator-yeogurt/issues/127)
 * Fixed issue where `autoprefixer:server` was running during build when it should have been `autoprefixer:build` [#126](https://github.com/larsonjj/generator-yeogurt/pull/126)
 
 ### v0.14.4:
@@ -293,7 +293,7 @@
   - 4 space indent has been changed to 2
   - [jscs](http://jscs.info/) is now used to enforce new style rules (for yeogurt repo only)
   - Differences: Allow 120 characters instead of the default 80. Also allow `else` on new lines.
-* Authentication boilerplates for React, Backbone, Jade, and Swig have been deprecated (will be removed from next release `0.15.0`)
+* Authentication boilerplates for React, Backbone, Pug, and Swig have been deprecated (will be removed from next release `0.15.0`)
   - Yeogurt already does so much that handling a large boilerplate codebase will make releases take much longer and ultimately slow down development. So these need to be removed.
 * Removed FTP deployment prompts. Instead, a [guide](https://github.com/larsonjj/generator-yeogurt/blob/master/docs/guides/ftp.md) has been added on how to implement it.
   - Going forward, guides will be added for more deployment options. (i.e. Heroku, Openshift, etc)
@@ -355,7 +355,7 @@
 * Added support for PostgreSQL databases when generating an express authentication app.
 * Added `npm run clean` command to cleanup all bower and npm dependencies as well as all generated files within `.tmp`, and `dist` folders.
 * Added grunt-wiredep to automatically handle injecting bower dependencies into the base template file.
-* Express apps now have the option to be generated with authentication using JSON Web Tokens for Backbone and React applications or Cookie Session Storage for Jade and Swig server applications.
+* Express apps now have the option to be generated with authentication using JSON Web Tokens for Backbone and React applications or Cookie Session Storage for Pug and Swig server applications.
 * If using authentication, a barebones authentication boilerplate will be included with essential code to get you up and running quickly with authenticating users and resetting passwords when generating an express server. Some features include:
  - Login/Logout
  - Edit Account
@@ -419,7 +419,7 @@
 * Reverted modernizr `<!-- build -->` comments
 * Reverted css `<!-- build -->` comments for sass, less, and stylus projects
 * Fixed typo in `README.md`
-* Fixed server template formatting for Jade, Swig, and HTML base templates
+* Fixed server template formatting for Pug, Swig, and HTML base templates
 * Added `--delete` option to subgenerators to allow for file deletion. ([#34](https://github.com/larsonjj/generator-yeogurt/issues/34))
 
 ### v0.11.7:
@@ -434,7 +434,7 @@
 #### date: 2014-09-15
 ##### changes:
 * Fixed formatting of `bower.json` file
-* Formatted spacing for all base templates (jade, swig, html)
+* Formatted spacing for all base templates (pug, swig, html)
 * Enabled css build comments in all base templates
 * Fixed issue where css build comments were incorrectly included with Sass, Less, and Sylus projects
 * Removed extra call for es5-shims files when using react
@@ -455,7 +455,7 @@
 #### date: 2014-09-09
 ##### changes:
 * Removed unneeded template-spec file for template sub-generator
-* Removed layout block for swig and jade templates with type=layout in the subgenerator
+* Removed layout block for swig and pug templates with type=layout in the subgenerator
 
 ### v0.11.3:
 #### date: 2014-09-09
@@ -466,7 +466,7 @@
 #### date: 2014-09-09
 ##### changes:
 * Fixed issue where --template option should have been --layout within template sub-generator
-* Fixed link issue for dashboard when creating jade files with template sub-generator
+* Fixed link issue for dashboard when creating pug files with template sub-generator
 
 ### v0.11.1:
 #### date: 2014-09-08
@@ -509,8 +509,8 @@
 * Removed all H5BP extras (adobe xdomain, IE11 icons, apple touch icon, and htaccess) as they were a bit superfluous for most projects and are easily added after project generation.
 * Removed logic to create extra print.css stylesheet for IE8 as the respond.js shim correctly translates @media print styles.
 * Removed `this.toTitleCase()` function from sub-generators as it is no longer used
-* Removed body tag classes from Jade and Swig templates
-* Removed example Jade and Swig files to reduce extra cruft.
+* Removed body tag classes from Pug and Swig templates
+* Removed example Pug and Swig files to reduce extra cruft.
 
 ***Additions***
 * Added ability to read existing `.yo-rc.json` files to load existing configuration
@@ -542,17 +542,17 @@
 * Updated grunt-sass to 0.14.x and added a 10 decimal precision option, so as to correctly compile large decimal numbers. (fixes many css issues with bootstrap and foundation)
 * Updated `connect:server` to serve up the `dev/.serve` folder as root so Backbone router pushState will work
 * Update: For single page applications and static sites using only HTML, `index.html` moved from `dev/` to `lib/templates` when using express server.
-* Update: For Static Sites using preprocessors (Jade, Swig, etc), `base` template file has moved from `dev/` to `client/templates/layouts` or `server/templates/layouts` if using express server
+* Update: For Static Sites using preprocessors (Pug, Swig, etc), `base` template file has moved from `dev/` to `client/templates/layouts` or `server/templates/layouts` if using express server
 
 ***Fixes***
-* Fixed reloading of Lo-dash, handlebars, and jade client-side templates when running `grunt serve`
+* Fixed reloading of Lo-dash, handlebars, and pug client-side templates when running `grunt serve`
 
 
 
 ### v0.9.11:
 #### date: 2014-08-28
 ##### changes:
-* Merged Fix for including sample jade h1 mixin ([#47](https://github.com/larsonjj/generator-yeogurt/pull/47))
+* Merged Fix for including sample pug h1 mixin ([#47](https://github.com/larsonjj/generator-yeogurt/pull/47))
 
 ### v0.9.10:
 #### date: 2014-08-22
@@ -584,7 +584,7 @@
 ### v0.9.5:
 #### date: 2014-07-31
 ##### changes:
-* Fixed issue where jade partials/modules were not updating pages due to the `newer:` in the watch task
+* Fixed issue where pug partials/modules were not updating pages due to the `newer:` in the watch task
 * Removed bower_components from JS watch task as it could cause EMFILE issues
 * Updated usemin task to update all html files instead of just index.html
 
@@ -635,7 +635,7 @@
 ### v0.8.3:
 #### date: 2014-06-16
 ##### changes:
-* Fixed [#31](https://github.com/larsonjj/generator-yeogurt/issues/28): Jade plugin was not being downloaded
+* Fixed [#31](https://github.com/larsonjj/generator-yeogurt/issues/28): Pug plugin was not being downloaded
 
 ### v0.8.2:
 #### date: 2014-06-13
@@ -650,7 +650,7 @@
 ### v0.8.0:
 #### date: 2014-06-13
 ##### changes:
-* Added Single Page Application option in generator that allows user to scaffold out a project using Backbone in combination with: Facebook's React, Handlebars, Lo-dash, or Jade views/templating.
+* Added Single Page Application option in generator that allows user to scaffold out a project using Backbone in combination with: Facebook's React, Handlebars, Lo-dash, or Pug views/templating.
 * Updated imagemin plugin to only handle `.jpg` and `.gif` files and added pngmin plugin to handle `.png` files. (This fixes iamgemin freezing on PNG files)
 * Added new router, model, collection, and view subgenerators that mimic those of the official [generator-backbone](https://github.com/yeoman/generator-backbone)
 * Added another subgenerator specifically for React components
@@ -674,7 +674,7 @@
 * Added bootstrap and foundation JS files to karma configuration file to properly handle testing with those frameworks
 * Added font-awesome loading when using Vanilla CSS (Previously not possible)
 * Updated tests to improve code coverage
-* Removed header and footer components for Jade and Swig as they are not really used and might cause confusion.
+* Removed header and footer components for Pug and Swig as they are not really used and might cause confusion.
 
 ### v0.7.2:
 #### date: 2014-06-11
@@ -693,15 +693,15 @@
 #### date: 2014-06-04
 ##### changes:
 * Removed header and footer components as they were not used and could cause confusion
-* Added `[include]` comment tags for styles and Jade/Swig components within main.scss/less and base.jade/swig files respectively. This will enable the ability to automatically include all (sub)-generated style and markup files with the subgenerator `--import` flag
+* Added `[include]` comment tags for styles and Pug/Swig components within main.scss/less and base.pug/swig files respectively. This will enable the ability to automatically include all (sub)-generated style and markup files with the subgenerator `--import` flag
 * Added `svn-init.bat` script to setup svn ignores on Windows
 
 ### v0.6.0:
 #### date: 2014-05-14
 ##### changes:
-* Added Ability to use Swig templates as well as Vanilla HTML rather than just Jade
+* Added Ability to use Swig templates as well as Vanilla HTML rather than just Pug
 * Modularized all grunt configuration and tasks in a new `grunt/` folder
-* Updated view subgenerator to create Swig and HTML files in addition to Jade
+* Updated view subgenerator to create Swig and HTML files in addition to Pug
 * Updated NPM dependencies
 * Added new unit tests to cover latest changes
 
@@ -758,7 +758,7 @@
 * Fixed Browserify Livereload issue (browserify script changes didn't trigger a rebuild)
 * Removed karma and jshint tests from 'build task' and added to the 'default' task
 * Defined the console object within the dynamic dashboard for IE
-* Added Jade file check for dynamic dashboard (fixes problem with file types other than .jade causing status classes to fail)
+* Added Pug file check for dynamic dashboard (fixes problem with file types other than .pug causing status classes to fail)
 * Externalized sourcemaps for browserify builds (sourcesContent property is null for grunt build tasks, should be fixed after this PR is merged: https://github.com/gruntjs/grunt-contrib-uglify/pull/196)
 
 ### v0.3.5:
@@ -791,7 +791,7 @@
 * Added coveralls.io integration for code coverage tracking
 * Fixed target filename in svn-init.sh to correctly setup SVN ignores
 * Removed the docs/ folder as it really isn't needed
-* Fixed issue where the dashboard base.jade template's compiled HTML was not valid when IE8+ support was not selected
+* Fixed issue where the dashboard base.pug template's compiled HTML was not valid when IE8+ support was not selected
 
 ### v0.3.1:
 #### date: 2014-03-04
@@ -833,7 +833,7 @@
 ### v0.2.8:
 #### date: 2014-02-17
 ##### changes:
-* Created subgenerators for jade modules, components, pages, and templates
+* Created subgenerators for pug modules, components, pages, and templates
 
 ### v0.2.7:
 #### date: 2014-02-16

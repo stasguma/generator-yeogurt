@@ -1,0 +1,39 @@
+textarea {
+    min-height: 100px;
+    padding: 15px 16px;
+    border: 1px solid $c--soft-black;
+    background-color: $c--white;
+    color: $c--soft-black;
+    // @include font(mukta, 16px, 18px);
+    &:focus {
+        border-color: $input-border-color-focus;
+        transition: border-color .15s;
+    }
+    &::placeholder {
+        color: $input-placeholder-color;
+    }
+    &[disabled] {
+        background: #f3f3f3;
+        opacity: .8;
+    }
+}
+
+.textarea {
+    padding: 10px 16px;
+    border: 2px solid $input-border-color;
+    // background-color: $c--white;
+    background-color: transparent;
+    color: $c--dark-gray;
+    // @include font(mukta, 16px, 18px);
+    &:focus {
+        border-color: $input-border-color-focus;
+        transition: border-color .15s;
+    }
+    &::placeholder {
+        color: $input-placeholder-color;
+    }
+    &[disabled] {
+        background: #f3f3f3;
+        opacity: .8;
+    }
+}

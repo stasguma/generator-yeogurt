@@ -1,18 +1,35 @@
 /**
- * Generate files specific to the styles folder
- */
+* Generate files specific to the styles folder
+*/
 
 'use strict';
 
-var styleFiles = function styleFiles() {
-  if (this.jsPreprocessor === 'none') {
-    this.template('src/shared/_scripts/main.js', 'src/_scripts/main.js');
-    this.template('src/shared/_modules/link/link.js', 'src/_modules/link/link.js');
-  }
-  else {
-    this.template('src/shared/_scripts/main.es6.js', 'src/_scripts/main.js');
-    this.template('src/shared/_modules/link/link.es6.js', 'src/_modules/link/link.js');
-  }
+const styleFiles = function styleFiles() {
+    const templates = [];
+    if (this.jsPreprocessor === 'none') {
+        templates.push(
+            { from: 'src/shared/_scripts/main.js', to: 'src/_scripts/main.js' },
+            { from: 'src/shared/_modules/footer/footer.js', to: 'src/_modules/footer/footer.js' },
+            { from: 'src/shared/_modules/header/header.js', to: 'src/_modules/header/header.js' },
+            { from: 'src/shared/_modules/tabs/tabs.js', to: 'src/_modules/tabs/tabs.js' }
+        );
+    }
+    else {
+        templates.push(
+            { from: 'src/shared/_scripts/main.es6.js', to: 'src/_scripts/main.js' },
+            { from: 'src/shared/_modules/footer/footer.es6.js', to: 'src/_modules/footer/footer.js' },
+            { from: 'src/shared/_modules/header/header.es6.js', to: 'src/_modules/header/header.js' },
+            { from: 'src/shared/_modules/tabs/tabs.es6.js', to: 'src/_modules/tabs/tabs.js' }
+        );
+    }
+
+    for (let file of templates) {
+        this.fs.copyTpl(
+            this.templatePath(file.from),
+            this.destinationPath(file.to),
+            { ...this.answers }
+        );
+    }
 };
 
 module.exports = styleFiles;

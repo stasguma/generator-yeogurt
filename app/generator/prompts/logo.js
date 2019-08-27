@@ -4,8 +4,8 @@
 
 'use strict';
 
-var logoPrompt = function logoPrompt() {
-  var yeogurtLogo = '' +
+const logoPrompt = function logoPrompt() {
+  const yeogurtLogo = '' +
     '                                    _   \n'.red +
     '  ' + 'Welcome to'.green + '                       | |  \n'.red +
     '  _   _  ___  ___   __ _ _   _ _ __| |_ \n'.red +

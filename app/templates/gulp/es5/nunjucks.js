@@ -6,10 +6,11 @@ var foldero = require('foldero');
 var nunjucks = require('gulp-nunjucks-html');
 var yaml = require('js-yaml');
 var gulpif = require('gulp-if');
+var log = require('fancy-log');
 
 module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) {
   var dirs = config.directories;
-  var dest = path.join(taskTarget);
+  var dest = path.join(taskTarget, dirs.pages.replace(/^_/, ''));
   var dataPath = path.join(dirs.source, dirs.data);
 
   // Nunjucks template compile
@@ -50,8 +51,8 @@ module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) 
     }
 
     return gulp.src([
-      path.join(dirs.source, '**/*.nunjucks'),
-      '!' + path.join(dirs.source, '{**/\_*,**/\_*/**}')
+      path.join(dirs.source, dirs.pages, '**/*.nunjucks'),
+      '!' + path.join(dirs.source, dirs.pages, '{**/\_*,**/\_*/**}')
     ])
     .pipe(plugins.changed(dest))
     .pipe(plugins.plumber())
@@ -63,11 +64,11 @@ module.exports = function(gulp, plugins, args, config, taskTarget, browserSync) 
       }
     }))
     .pipe(nunjucks({
-      searchPaths: [path.join(dirs.source)],
+      searchPaths: [path.join(dirs.source, dirs.pages)],
       ext: '.html'
     })
     .on('error', function(err) {
-      plugins.util.log(err);
+      log(err);
     }))
     .on('error', plugins.notify.onError(config.defaultNotification))
     .pipe(gulpif(args.production, plugins.htmlmin({

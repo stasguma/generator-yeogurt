@@ -1,4 +1,4 @@
-# <%= _.titleize(projectName) %> readme
+# <%= titleize(projectName) %> readme
 
 Generated on <%= (new Date).toISOString().split('T')[0] %> using
 [<%= pkg.name %>@<%= pkg.version %>](https://github.com/larsonjj/generator-yeogurt)
@@ -24,13 +24,13 @@ Styles<% if (cssOption === 'sass') { %>
 - [Less](http://lesscss.org/)<% } else if (cssOption === 'stylus') { %>
 - [Stylus](https://learnboost.github.io/stylus/)<% } %>
 
-Markup<% if (htmlOption === 'jade') { %>
-- [Jade](http://jade-lang.com/)<% } else if (htmlOption === 'nunjucks') { %>
+Markup<% if (htmlOption === 'pug') { %>
+- [Pug](https://pugjs.org/)<% } else if (htmlOption === 'nunjucks') { %>
 - [Nunjucks](https://mozilla.github.io/nunjucks/)<% } %>
 
 Optimization
 - [Imagemin](https://github.com/imagemin/imagemin)
-- [Uglify](https://github.com/mishoo/UglifyJS)
+- [Uglify](https://github.com/terser-js/terser)
 
 Server
 - [BrowserSync](http://www.browsersync.io/)

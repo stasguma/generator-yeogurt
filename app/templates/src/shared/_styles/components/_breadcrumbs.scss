@@ -1,0 +1,39 @@
+.l-breadcrumbs {
+    margin-bottom: 40px;
+    @include mq(desktop) {
+        margin-bottom: 60px;
+    };
+}
+.b-breadcrumbs {
+    &__item {
+        position: relative;
+        & + & {
+            margin-left: 8px;
+            &::before {
+                @include pseudo(inline-block, relative, '/');
+                margin-right: 6px;
+                // @include font(sarabun-semi-bold, 20px, 26px);
+                @include mq(desktop) {
+                    // @include font(sarabun-semi-bold, 28px, 34px);
+                };
+            }
+        }
+        &:first-child {
+            .b-breadcrumbs__link {
+                // @include font(sarabun-semi-bold, 19px, 28px);
+                @include mq(desktop) {
+                    // @include font(sarabun-semi-bold, 26px, 28px);
+                };
+            }
+        }
+    }
+    &__link {
+        display: inline-block;
+        color: $c--dark-gray;
+        text-transform: uppercase;
+        // @include font(sarabun-semi-bold, 13px, 24px);
+        @include mq(desktop) {
+            // @include font(sarabun-semi-bold, 18px, 24px);
+        };
+    }
+}

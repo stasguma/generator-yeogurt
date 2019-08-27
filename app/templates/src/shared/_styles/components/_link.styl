@@ -1,0 +1,45 @@
+// link styles
+
+// unvisited link
+a:link
+    color: #ff0000
+
+// visited link
+a:visited
+    color: #00ff00
+
+// mouse over link
+a:hover
+    color: #ff00ff
+
+// selected link
+a:active
+    color: #0000ff
+
+.link
+	position: relative
+	display: inline-block
+	color: black
+	// font(mukta, 15px, 24px)
+	transition: .2s
+	&::before
+		pseudo()
+		bottom: 0
+		left: 0
+		width: 0
+		height: 2px
+		background-color: black
+		transition: .2s
+
+    // mouse over link
+    &:hover,
+	&:focus
+        color: lighten(black, 10%)
+		&::before
+			width: 100%
+
+    // // selected link
+	&:active
+		color: black
+		&::before
+			width: 0

@@ -3,57 +3,72 @@
 import path from 'path';
 
 export default function(gulp, plugins, args, config, taskTarget, browserSync) {
-  let dirs = config.directories;
+    let dirs = config.directories;
+    let entries = config.entries;
 
-  // Watch task
-  gulp.task('watch', () => {
-    if (!args.production) {<% if (cssOption === 'sass') { %>
-      // Styles
-      gulp.watch([
-        path.join(dirs.source, dirs.styles, '**/*.{scss,sass}'),
-        path.join(dirs.source, dirs.modules, '**/*.{scss,sass}')
-      ], ['sass']);<% } else if (cssOption === 'less') { %>
-      gulp.watch([
-        path.join(dirs.source, dirs.styles, '**/*.less'),
-        path.join(dirs.source, dirs.modules, '**/*.less'),
-      ], ['less']);<% } else if (cssOption === 'stylus') { %>
-      gulp.watch([
-        path.join(dirs.source, dirs.styles, '**/*.styl'),
-        path.join(dirs.source, dirs.modules, '**/*.styl')
-      ], ['stylus']);
-      <% } %><% if (htmlOption === 'jade') { %>
+    // Watch task
+    gulp.task('watch', () => {
+        if (!args.production) {<% if (cssOption === 'sass') { %>
+            // Styles
+            gulp.watch([
+                dirs.styles + '/**/*.{scss,sass}',
+                dirs.modules + '/**/*.{scss,sass}'
+            ], { cwd: path.join(dirs.source) }, gulp.series('sass'));<% } else if (cssOption === 'less') { %>
+            gulp.watch([
+                dirs.styles + '/**/*.less',
+                dirs.modules + '/**/*.less'
+            ], { cwd: path.join(dirs.source) }, gulp.series('less'));<% } else if (cssOption === 'stylus') { %>
+            gulp.watch([
+                dirs.styles + '/**/*.styl',
+                dirs.modules + '/**/*.styl'
+            ], { cwd: path.join(dirs.source) }, gulp.series('stylus'));
+            <% } %><% if (htmlOption === 'pug') { %>
 
-      // Jade Templates
-      gulp.watch([
-        path.join(dirs.source, '**/*.jade'),
-        path.join(dirs.source, dirs.data, '**/*.{json,yaml,yml}')
-      ], ['jade']);<% } else if (htmlOption === 'nunjucks') { %>
+            // Pug Templates
+            gulp.watch([
+                '**/*.pug',
+                dirs.data + '/**/*.{json,yaml,yml}'
+            ], { cwd: path.join(dirs.source) }, gulp.series('pug'));<% } else if (htmlOption === 'nunjucks') { %>
 
-      // Nunjucks Templates
-      gulp.watch([
-        path.join(dirs.source, '**/*.nunjucks'),
-        path.join(dirs.source, dirs.data, '**/*.{json,yaml,yml}')
-      ], ['nunjucks']);
-      <% } %>
+            // Nunjucks Templates
+            gulp.watch([
+                '**/*.nunjucks',
+                dirs.data + '/**/*.{json,yaml,yml}'
+            ], { cwd: path.join(dirs.source) }, gulp.series('nunjucks'));
+            <% } %>
 
-      // Copy
-      gulp.watch([
-        path.join(dirs.source, '**/*'),
-        '!' + path.join(dirs.source, '{**/\_*,**/\_*/**}')<% if (htmlOption === 'nunjucks') { %>,
-        '!' + path.join(dirs.source, '**/*.nunjucks')<% } else if (htmlOption === 'jade') { %>,
-        '!' + path.join(dirs.source, '**/*.jade')<% } %>
-      ], ['copy']);
+            // Copy
+            gulp.watch([
+                '**/*',
+                '!{**/\_*,**/\_*/**}'<% if (htmlOption === 'nunjucks') { %>,
+                '!**/*.nunjucks'<% } else if (htmlOption === 'pug') { %>,
+                '!**/*.pug'<% } %>
+            ], { cwd: path.join(dirs.source) }, gulp.series('copy'));
 
-      // Images
-      gulp.watch([
-        path.join(dirs.source, dirs.images, '**/*.{jpg,jpeg,gif,svg,png}')
-      ], ['imagemin']);
+            // Images
+            //  ignore doesn`t work
+            gulp.watch([
+                entries.image,
+                `!${dirs.svgSprite}/**/*`
+            ], { cwd: path.join(dirs.source, dirs.images) }, gulp.series('imagemin'));
 
-      // All other files
-      gulp.watch([
-        path.join(dirs.temporary, '**/*'),
-        '!' + path.join(dirs.temporary, '**/*.{css,map,html,js}')
-      ]).on('change', browserSync.reload);
-    }
-  });
+            // Svg icon sprite
+            //  ignore doesn`t work
+            gulp.watch([
+                '**/*.svg'
+            ], { cwd: path.join(dirs.source, dirs.images, dirs.svgSprite, dirs.svgIconSprite) }, gulp.series('svg-icon-sprite'));
+
+            // Svg img sprite
+            //  ignore doesn`t work
+            gulp.watch([
+                '**/*.svg'
+            ], { cwd: path.join(dirs.source, dirs.images, dirs.svgSprite, dirs.svgImgSprite) }, gulp.series('svg-img-sprite'));
+
+            // All other files
+            gulp.watch([
+                '**/*',
+                '!**/*.{css,map,html,js}'
+            ], { cwd: path.join(dirs.temporary) }).on('change', browserSync.reload);
+        }
+    });
 }

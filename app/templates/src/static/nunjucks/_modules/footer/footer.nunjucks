@@ -1,0 +1,44 @@
+{% from "../svg/svg.nunjucks" import icon-svg, img-svg %}
+
+footer.footer
+    .grid-container
+        .grid-x.align-justify.align-top
+            .cell.large-2
+                a.logo(href= '/')
+                    +img-svg({id: 'logo-white', __class: 'logo__svg'})
+            .cell.large-6
+                .grid-x
+                    .cell.large-auto
+                        .footer-links-col.footer__col
+                            h3.footer__title.footer__dd-trigger Title
+                                +icon-svg({id: 'arrow-down', __class: 'icon'})
+                            .footer__dd-content
+                                ul.footer-links-col__list
+                                    li.footer-links-col__item
+                                        a.footer-links-col__link(href= baseUrl + 'pages/link.html') Link
+            .cell.large-4
+                .footer-links-col.footer__col
+                    .grid-x.align-middle
+                        .cell.large-4
+                            h3.footer__title Subscribe
+                        .cell.large-auto
+                            span.footer__caption to learn about new projects
+                    .subscribe-input.footer-links-col__subscribe
+                        form
+                            input.subscribe-input__input(type= 'email' placeholder= 'Enter your e-mail' required)
+                            button.btn.subscribe-input__btn(type= 'submit')
+                                +icon-svg({id: 'icon-send', __class: 'icon subscribe-input__icon'})
+                .footer__connect
+                    h3.footer__title Connect with us
+                    .socials.footer__socials
+                        a.socials__link(href= '#' target= '_blank')
+                            +icon-svg({id: 'facebook', __class: 'icon socials__icon'})
+                        a.socials__link(href= '#' target= '_blank')
+                            +icon-svg({id: 'instagram', __class: 'icon socials__icon'})
+                        a.socials__link(href= '#' target= '_blank')
+                            +icon-svg({id: 'twitter', __class: 'icon socials__icon'})
+                        a.socials__link(href= '#' target= '_blank')
+                            +icon-svg({id: 'youtube', __class: 'icon socials__icon'})
+.subfooter
+    .grid-container
+        .subfooter__text © 2018 Company Name. All Rights Reserved

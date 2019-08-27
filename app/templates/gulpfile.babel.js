@@ -15,12 +15,12 @@ const plugins = gulpLoadPlugins();<% if (testFramework !== 'none') { %>
 const KarmaServer = require('karma').Server;<% } %>
 
 const defaultNotification = function(err) {
-  return {
-    subtitle: err.plugin,
-    message: err.message,
-    sound: 'Funk',
-    onLast: true,
-  };
+    return {
+        subtitle: err.plugin,
+        message: err.message,
+        sound: 'Funk',
+        onLast: true,
+    };
 };
 
 let config = Object.assign({}, pjson.config, defaultNotification);
@@ -35,47 +35,56 @@ let browserSync = browserSyncLib.create();
 // This will grab all js in the `gulp` directory
 // in order to load all gulp tasks
 glob.sync('./gulp/**/*.js').filter(function(file) {
-  return (/\.(js)$/i).test(file);
+    return (/\.(js)$/i).test(file);
 }).map(function(file) {
-  require(file)(gulp, plugins, args, config, taskTarget, browserSync);
+    require(file)(gulp, plugins, args, config, taskTarget, browserSync);
 });
 
-// Default task
-gulp.task('default', ['clean'], () => {
-  gulp.start('build');
-});
 
 // Build production-ready code
-gulp.task('build', [
-  'copy',
-  'imagemin'<% if (htmlOption === 'jade') { %>,
-  'jade'<% } else if (htmlOption === 'nunjucks') {  %>,
-  'nunjucks'<% } %><% if (cssOption === 'less') { %>,
-  'less'<% } else if (cssOption === 'sass') { %>,
-  'sass'<% } else if (cssOption === 'stylus') { %>,
-  'stylus'<% } %>,
-  'browserify'
-]);
+gulp.task('build', gulp.series(
+    'copy',
+    'imagemin',
+    'svg-icon-sprite',
+    'svg-img-sprite'<% if (htmlOption === 'pug') { %>,
+    'pug'<% } else if (htmlOption === 'nunjucks') {  %>,
+    'nunjucks'<% } %><% if (cssOption === 'less') { %>,
+    'less'<% } else if (cssOption === 'sass') { %>,
+    'sass'<% } else if (cssOption === 'stylus') { %>,
+    'stylus'<% } %>,
+    'browserify'
+));
 
 // Server tasks with watch
-gulp.task('serve', [
-  'imagemin',
-  'copy'<% if (htmlOption === 'jade') { %>,
-  'jade'<% } else if (htmlOption === 'nunjucks') {  %>,
-  'nunjucks'<% } %><% if (cssOption === 'less') { %>,
-  'less'<% } %><% if (cssOption === 'sass') { %>,
-  'sass'<% } %><% if (cssOption === 'stylus') { %>,
-  'stylus'<% } %>,
-  'browserify',
-  'browserSync',
-  'watch'
-]);
+gulp.task('serve', gulp.series(
+    gulp.parallel(
+        'imagemin',
+        'svg-icon-sprite',
+        'svg-img-sprite',
+        'copy'<% if (htmlOption === 'pug') { %>,
+        'pug'<% } else if (htmlOption === 'nunjucks') {  %>,
+        'nunjucks'<% } %><% if (cssOption === 'less') { %>,
+        'less'<% } %><% if (cssOption === 'sass') { %>,
+        'sass'<% } %><% if (cssOption === 'stylus') { %>,
+        'stylus'<% } %>,
+        'browserify'
+    ),
+    gulp.parallel(
+        'browserSync',
+        'watch'
+    )
+));
 
 // Testing
-gulp.task('test', ['eslint']<% if (testFramework === 'none') { %>);<% } else { %>, (done) => {
-  new KarmaServer({
-    configFile: path.join(__dirname, '/karma.conf.js'),
-    singleRun: !args.watch,
-    autoWatch: args.watch
-  }, done).start();
+gulp.task('test', gulp.series('eslint'<% if (testFramework === 'none') { %>));<% } else { %>, (done) => {
+    new KarmaServer({
+        configFile: path.join(__dirname, '/karma.conf.js'),
+        singleRun: !args.watch,
+        autoWatch: args.watch
+    }, done).start();
 });<% } %>
+
+// Default task
+gulp.task('default', gulp.series('clean', 'build', (done) => {
+    done();
+}));

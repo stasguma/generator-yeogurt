@@ -1,8 +1,8 @@
-{% extends '<%= layoutDir %>/<%= layout %>.nunjucks' %}
+{% extends '../../<%= layoutDir %>/<%= layout %>.nunjucks' %}
 
 {% block config %}
   {# Correct base url pathing for this page #}
-  {% set baseUrl = '../' %}
+  {% set baseUrl = '../../' %}
 {% endblock %}
 
 {% block content %}

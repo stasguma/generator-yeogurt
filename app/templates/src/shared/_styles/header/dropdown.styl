@@ -1,0 +1,80 @@
+.dd-trigger
+    position: relative
+    &:hover, &:active
+        // & + .dd-content
+        .dd-content
+            max-height: 700px
+
+            mq(desktop)
+                opacity: 1
+                visibility: visible
+                transition: .3s
+
+                max-height: none
+    &__arrow
+        width: 10px
+        height: 10px
+        margin-left: 10px
+        fill: $c--black
+    &--pointer
+        cursor: pointer
+.dd-content
+    overflow: hidden
+    max-height: 0
+    // border-top: 2px solid transparent
+    transition: .2s ease-out
+    mq(desktop)
+        overflow: visible
+        position: absolute
+        top: calc(100% + 20px)
+        left: 50%
+        z-index: 1
+        display: flex
+        flex-flow: column wrap
+        // width: 490px
+        max-height: none
+        // padding: 40px
+        padding: 24px 0
+        background-color: $c--white
+        border: 1px dashed $c--dark-gray
+        color: lighten($c--black, 10%)
+        opacity: 0
+        visibility: hidden
+        backface-visibility: hidden
+        transform: translate3d(-50%, 0, 0)
+        transition: none
+    &::before
+        mq(desktop)
+            pseudo()
+            left: 0
+            bottom: 100%
+            width: 100%
+            height: 24px
+    &__list
+        padding: 16px 0
+        border-top: 2px solid $c--dark-gray
+        mq(desktop)
+            padding: 0
+            border: none
+
+            display: flex
+            flex-flow: column wrap
+
+    &__item
+        mq(desktop)
+            padding: 0 40px
+        & + &
+            // border-top: 1px solid #ededed
+    &__link
+        position: relative
+        display: block
+        padding: 8px 0
+        color: $c--dark-gray
+        text-decoration: none
+        text-align: center
+        white-space: nowrap
+        // font(mukta, 18px, 20px)
+        mq(desktop)
+            display: inline-block
+            padding: 8px 0
+            text-align: left

@@ -1,0 +1,67 @@
+// <span class="radio-wrap">
+//     <input id="rad" type="radio" name="radio" value="radio">
+//     <label for="rad">Radio</label>
+// </span>
+
+.radio-row
+    & + &
+        margin-top: 16px;
+
+[type="radio"]
+    &:checked,
+    &:not(:checked)
+        position: absolute;
+        left: -9999px;
+        & + label
+            position: relative;
+            display: inline-block;
+            padding-left: 24px;
+            cursor: pointer;
+            // line-height: 15px
+            color: $c--soft-black;
+            // font(mukta, 16px, 18px);
+            &::before,
+            &::after
+                pseudo(inline-block);
+                background-color: $c--white;
+            &::before
+                left: 0;
+                top: 1px;
+                // top: 50%;
+                // transform: translateY(-50%);
+                width: 16px;
+                height: 16px;
+                border: 1px solid $input-border-color;
+                border-radius: 100%;
+                transition: border-color .2s;
+            &::after
+                top: 5px;
+                left: 4px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                transition: .2s ease;
+
+    &:not(:checked)
+
+        & + label
+            &:hover
+                &::before
+                    border-color: $input-border-color;
+            &::after
+                opacity: 0;
+                transform: scale(0);
+    &:checked
+        & + label
+            &::before
+                background-color: black;
+                border-color: black;
+
+            &::after
+                opacity: 1;
+                transform: scale(1);
+
+.radio-wrap
+    display: inline-block;
+    & + &
+        margin-left: 20px;

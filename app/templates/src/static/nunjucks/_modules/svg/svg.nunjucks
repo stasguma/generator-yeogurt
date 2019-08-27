@@ -1,0 +1,43 @@
+//- +icon-svg({name: 'icon-name', __class: 'class-name'})
+{% macro icon-svg(spec) %}
+
+{% set spec = spec or {} %}
+{% set _id = spec.id or '' %}
+{% set _class = spec.__class or spec.id %}
+{% set _src = spec.src or baseUrl + 'images/icon-sprite.svg' %}
+
+<svg id="{{_id}}" class="{{_class}}">
+    <use xlink:href="{{_src}}#{{_id}}"/>
+</svg>
+{% endmacro %}
+
+{% macro img-svg(spec) %}
+
+{% set spec = spec or {} %}
+{% set _id = spec.id or '' %}
+{% set _class = spec.__class or spec.id %}
+{% set _src = spec.src or baseUrl + 'images/img-sprite.svg' %}
+
+<svg id="{{_id}}" class="{{_class}}">
+    <use xlink:href="{{_src}}#{{_id}}"/>
+</svg>
+{% endmacro %}
+
+//- +svg('img-name', 'class-name')
+mixin svg-img(id, __class, src)
+    if !src
+        - var src = baseUrl + 'images/svg'
+    if !__class
+        - var __class = id
+
+    span(class=__class)
+        img(src=`${src}${id}.svg`)
+
+mixin svg-icon(id, src, attrs)
+    if !src
+        - var src = baseUrl + 'images/icon-sprite.svg'
+    if !attrs
+        - var attrs = {}
+
+    svg(class=`icon icon-${id}`)&attributes(attrs)
+        use(xlink:href=`${src}#${id}`)

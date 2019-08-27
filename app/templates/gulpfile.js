@@ -39,27 +39,31 @@ glob.sync('./gulp/**/*.js').filter(function(file) {
 });
 
 // Default task
-gulp.task('default', ['clean'], function() {
+gulp.task('default', gulp.series('clean'), function() {
   gulp.start('build');
 });
 
 // Build production-ready code
-gulp.task('build', [
+gulp.task('build', gulp.series(
   'copy',
-  'imagemin'<% if (htmlOption === 'jade') { %>,
-  'jade'<% } else if (htmlOption === 'nunjucks') {  %>,
+  'imagemin',
+  'svg-icon-sprite',
+  'svg-img-sprite'<% if (htmlOption === 'pug') { %>,
+  'pug'<% } else if (htmlOption === 'nunjucks') {  %>,
   'nunjucks'<% } %><% if (cssOption === 'less') { %>,
   'less'<% } else if (cssOption === 'sass') { %>,
   'sass'<% } else if (cssOption === 'stylus') { %>,
   'stylus'<% } %>,
   'browserify'
-]);
+));
 
 // Server tasks with watch
-gulp.task('serve', [
+gulp.task('serve', gulp.series(
   'imagemin',
-  'copy'<% if (htmlOption === 'jade') { %>,
-  'jade'<% } else if (htmlOption === 'nunjucks') {  %>,
+  'svg-icon-sprite',
+  'svg-img-sprite',
+  'copy'<% if (htmlOption === 'pug') { %>,
+  'pug'<% } else if (htmlOption === 'nunjucks') {  %>,
   'nunjucks'<% } %><% if (cssOption === 'less') { %>,
   'less'<% } %><% if (cssOption === 'sass') { %>,
   'sass'<% } %><% if (cssOption === 'stylus') { %>,
@@ -67,10 +71,10 @@ gulp.task('serve', [
   'browserify',
   'browserSync',
   'watch'
-]);
+));
 
 // Testing
-gulp.task('test', ['eslint']<% if (testFramework === 'none') { %>);<% } else { %>, function(done) {
+gulp.task('test', gulp.series('eslint'<% if (testFramework === 'none') { %>));<% } else { %>, function(done) {
   new KarmaServer({
     configFile: path.join(__dirname, '/karma.conf.js'),
     singleRun: !args.watch,

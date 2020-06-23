@@ -1,0 +1,28 @@
+a
+    &:not(.btn):not(.link):not(.navigation__link):not(.socials__link):not(.logo):not(.footer__link):not(.sg-sidebar__link)
+        // unvisited link
+        &:link
+            color: #ff0000
+
+        // visited link
+        &:visited
+            color: #00ff00
+
+        // mouse over link
+        &:hover
+            color: #ff00ff
+
+        // selected link
+        &:active
+            color: #0000ff
+
+.link
+    position: relative
+    display: inline-flex
+    align-items: center
+    color: $c--soft-black
+    // @include font(gilroy, 20px)
+    text-decoration: none
+    &:hover,
+    &:focus
+        text-decoration: underline

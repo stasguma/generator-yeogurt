@@ -41,9 +41,9 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync) {
                 js2svg: {
                     pretty: true
                 },
-                plugins: [{
-                    // collapseGroups: false
-                }]
+                // plugins: [{
+                //     collapseGroups: false
+                // }]
             }))
             // Delete all the style attributes in shapes
             .pipe(cheerio({

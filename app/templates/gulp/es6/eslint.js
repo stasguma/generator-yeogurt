@@ -10,9 +10,8 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync) {
 
     // ESLint
     gulp.task('eslint', (done) => {
-        return gulp.src([<% if (jsPreprocessor === 'none') { %>
-            'gulpfile.js',<% } else if (jsPreprocessor === 'es6') { %>
-            'gulpfile.babel.js',<% } %>
+        return gulp.src([
+            'gulpfile.babel.js',
             dirs.source + '/**/*.js',
             // Ignore all vendor folder files
             '!**/vendor/**/*'

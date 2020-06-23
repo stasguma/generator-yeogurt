@@ -1,19 +1,16 @@
-dl.accordion.js-badger-accordion
-    dt.accordion__header
-        button.accordion__trigger.js-badger-accordion-header
-            .accordion__trigger-title-symbol
-            .accordion__trigger-title Title
-    dd.accordion__panel.badger-accordion__panel.js-badger-accordion-panel
-        .accordion__panel-inner.js-badger-accordion-panel-inner
-            p Badgers are short-legged omnivores in the family Mustelidae, which also includes otters, polecats, weasels and wolverines. They belong to the caniform suborder of carnivoran mammals.
-            p Badgers are short-legged omnivores in the family Mustelidae, which also includes otters, polecats, weasels and wolverines. They belong to the caniform suborder of carnivoran mammals.
-            p Badgers are short-legged omnivores in the family Mustelidae, which also includes otters, polecats, weasels and wolverines. They belong to the caniform suborder of carnivoran mammals.
-    dt.accordion__header
-        button.accordion__trigger.js-badger-accordion-header
-            .accordion__trigger-title-symbol
-            .accordion__trigger-title Title 2
-    dd.accordion__panel.badger-accordion__panel.js-badger-accordion-panel
-        .accordion__panel-inner.js-badger-accordion-panel-inner
-            p Badgers are short-legged omnivores in the family Mustelidae, which also includes otters, polecats, weasels and wolverines. They belong to the caniform suborder of carnivoran mammals.
-            p Badgers are short-legged omnivores in the family Mustelidae, which also includes otters, polecats, weasels and wolverines. They belong to the caniform suborder of carnivoran mammals.
-            p Badgers are short-legged omnivores in the family Mustelidae, which also includes otters, polecats, weasels and wolverines. They belong to the caniform suborder of carnivoran mammals.
+//- +tabs({ id: 'tab', data: [{}] })
+mixin tabs(spec)
+    - spec = spec || {}
+    - spec.__class = spec.__class || ''
+    - spec.id = spec.id || 'tab'
+    
+    .b-tab
+        .b-tab__header
+            ul.b-tab__nav-list
+                each item, index in data
+                    li.b-tab__nav-item(class={ "is-active": index == 0 })
+                        a.b-tab__nav-link(href= "#" + spec.id + "-" + index data-tab= spec.id + "-" + index)= item.title
+                    
+        .b-tab__content-wrapper
+            each item, index in data
+                .b-tab__content(id= spec.id + "-" + index class={ "is-active": index == 0 })

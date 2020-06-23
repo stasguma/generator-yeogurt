@@ -2,7 +2,6 @@
 
 const path = require('path');
 const Generator = require('yeoman-generator');
-const _ = require('lodash');
 const grabFiles = require('./helpers/grabFiles');
 require('colors');
 

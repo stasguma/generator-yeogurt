@@ -1,0 +1,45 @@
+//- +authModal({ id: 'auth-modal' })
+mixin authModal(spec)
+    - spec = spec || {}
+    - spec.__class = spec.__class || ''
+    - spec.id = spec.id || ''
+
+    //- div(class=spec.__class)&attributes(attributes)
+    .modal.micromodal-slide(aria-hidden="true" id= spec.id)
+        .modal__overlay(tabindex="-1" data-micromodal-close)
+            .modal__container(role="dialog" aria-modal="true" aria-labelledby="modal-1-title")
+                header.modal__header
+                    h2#modal-1-title.modal__title Авторизация
+                    button.btn.modal__close(aria-label="Close modal" data-micromodal-close)
+                main#modal-1-content.modal__content
+                    form.form
+                        .form__row.form__row--small
+                            .form__item
+                                .form-label.form-label--small.form__label
+                                    label(for= "auth-email") Введите Ваш e-mail
+                                .form-input
+                                    input#auth-email.input-small(type='email' name="email" placeholder="Email")
+                        .form__row.form__row--small
+                            .form__item
+                                .form-label.form-label--small.form__label
+                                    label(for= "auth-password") Введите Ваш пароль
+                                .form-input
+                                    input#auth-password.input-small(type='password' name="password" placeholder="Пароль")
+                        .form__row.form__row--small
+                            .grid-x.align-middle.align-justify
+                                .cell.auto
+                                    button.btn.btn-primary.btn-primary--small(type="submit") Войти
+                                .cell.shrink
+                                    .grid-y
+                                        .cell
+                                            a.auth-link(href="#forgot") Забыли пароль?
+                                        .cell
+                                            a.auth-link(href="#reg") Зарегистрироваться
+                    
+                    .modal__divider Войти в аккаунт:                                        
+                                                                                        
+                footer.modal__footer
+                    .modal__social-actions
+                        button.btn.btn-primary.modal__social-actions-btn С помощью
+                        button.btn.btn-secondadry.modal__social-actions-btn С помощью
+                    //- button.modal__btn(data-micromodal-close aria-label="Close this dialog window") Close

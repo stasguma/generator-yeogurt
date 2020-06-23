@@ -1,0 +1,51 @@
+.form-input
+    position: relative;
+
+.form-label
+    color: $c--soft-black;
+    // font(gilroy-sb, 18px);
+
+.form
+    &__error-text
+        position: absolute;
+        top: 100%;
+        display: none;
+        margin-top: 6px;
+        color: $c--red;
+        // font(gilroy, 16px);
+    &__hint
+        position: absolute
+        top: 100%
+        margin-top: 6px
+        color: $c--soft-black
+        // @include font(gilroy, 16px)
+    &__row
+        margin-bottom: 20px;
+        mq(desktop)
+            margin-bottom: 40px;
+    &__label
+        margin-bottom: 12px;
+    &__item
+        position relative;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        height: 100%;
+    &__bottom
+        margin-top: 40px;
+    &__submit
+        display: block;
+        margin: 20px auto 0;
+        max-width: 300px;
+        width: 100%;
+        mq(desktop)
+            margin: 30px auto 0;
+
+.has-error
+    .form-input
+        input
+            border-color: $c--red;
+    .form__error-text
+        display: block;
+    .form__hint
+        display: none;

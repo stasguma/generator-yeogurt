@@ -1,15 +1,15 @@
 <% if (testFramework === 'mocha') { %>/*eslint no-unused-expressions:0 */
 <% } %>'use strict';
 
-var Header = require('../header');
+import Header from '../header';
 
 describe('Header View', function() {
 
-    beforeEach(function() {
+    beforeEach(() => {
         this.header = new Header();
     });
 
-    it('Should run a few assertions', function() {
+    it('Should run a few assertions', () => {
         expect(this.header)<% if (testFramework === 'jasmine') { %>.toBeDefined()<% } else if (testFramework === 'mocha') { %>.to.exist<% } %>;
     });
 

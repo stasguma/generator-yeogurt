@@ -29,13 +29,6 @@ npm install [package name] --save
 
 // CSS
 @import node_modules/normalize.css/normalize
-```<% } else if (cssOption === 'less') { %>
-
-**Using LESS:**
-
-```less
-// LESS
-@import 'node_modules/bootstrap/less/bootstrap';
 
 // CSS
 @import (inline) 'node_modules/normalize.css/normalize.css';

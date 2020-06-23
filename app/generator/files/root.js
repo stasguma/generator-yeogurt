@@ -11,15 +11,10 @@ const rootFiles = function rootFiles() {
     let files = [];
 
     // root (/)
-    if (this.jsPreprocessor === 'none') {
-        templates.push({ from: 'gulpfile.js', to: 'gulpfile.js' });
-    }
-    else {
-        templates.push(
-            { from: 'gulpfile.babel.js', to: 'gulpfile.babel.js' },
-            { from: 'babel.config.js', to: 'babel.config.js' }
-        );
-    }
+    templates.push(
+        { from: 'gulpfile.babel.js', to: 'gulpfile.babel.js' },
+        { from: 'babel.config.js', to: 'babel.config.js' }
+    );
     templates.push(
         { from: '_package.json', to: 'package.json' },
         { from: 'README.md', to: 'README.md' }

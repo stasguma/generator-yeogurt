@@ -1,58 +1,58 @@
-.tab-control
-    &::after
-        pseudo(block, relative);
+.b-tab
+    &__header
+        position: relative;
+        margin-bottom: 40px;
+        mq(tablet-wide)
+            margin-bottom: 60px;
+    &__nav-list
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        max-width: 290px;
+        border-radius: 5px;
+        background-color: $c--white;
+        margin: 0 auto;
+        mq(tablet-wide)
+            flex-flow: row nowrap;
+            max-width: 100%;
+    &__nav-item
+        position: relative;
         width: 100%;
-        height: 3px;
-        background-color: transparent;
-        transition: .2s;
-    &.is-active
-        &::after
-            pseudo(block, relative);
-            background-color: blue;
-
-.tab-content
-    display: none;
-
-    &.is-active
-        display: block;
-        animation: fadeIn .3s;
-
-.tab
-    display: flex;
-    flex-flow: column;
-    mq(desktop)
-        flex-flow: row nowrap;
-    &__item
-        width: 100%;
-        &:first-child
-            .tab__link
-                border-top: 2px solid $c--dark-gray;
-                mq(desktop)
-                    border-left: 2px solid $c--dark-gray;
-    &__link
+        & + &
+            &::before
+                pseudo;
+                center(horizontal);
+                width: 36px;
+                height: 1px;
+                background-color: $light-gray;
+                mq(tablet-wide)
+                    center(vertical);
+                    width: 1px;
+                    height: 50%;
+                    left: 0;
+        &.is-active
+            & + .b-tab__nav-item
+                &::before
+                    display: none;
+            .b-tab__nav-link
+                border-radius: 5px;
+                background-color: $c--green;
+                color: $c--white;
+    &__nav-link
+        position: relative;
         display: inline-block;
         width: 100%;
-        padding: 8px 16px;
-        border: 2px solid $c--dark-gray;
-        border-top: none;
-        background-color: $c--light-gray;
-        color: $c--dark-gray;
-        text-transform: uppercase;
+        padding: 24px 10px;
+        white-space: nowrap;
         text-align: center;
-        // font(mukta, 15px, 35px);
-        mq(desktop)
-            border: 2px solid $c--dark-gray;
-            border-left: none;
-        &--active
-            background-color: $c--dark-gray;
-            color: $c--white;
-        &--disabled
-            border: 2px solid $c--medium-gray;
-            border-top: none;
-            color: $c--medium-gray;
-            cursor: default;
-            pointer-events: none;
-            user-select: none;
-            mq(desktop)
-                border: 2px solid $c--medium-gray;
-                border-left: none;
+        color: $c--soft-black;
+        // font(gilroy-b, 18px);
+        transition: color .2s;
+        &:hover
+            color: $c--green;
+
+    &__content
+        display: none;
+        animation: fadeIn 1s;
+        &.is-active
+            display: block;

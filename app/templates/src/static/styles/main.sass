@@ -1,0 +1,101 @@
+// Reset Styles<% if (cssReset === 'ericmeyer') { %>
+@import 'node_modules/normalize.css/normalize'<% } %><% if (cssReset === 'normalize') { %>
+@import 'node_modules/reset-css/sass/reset'<% } %>
+
+// Import Helpers
+@import "vars/index"
+@import "helpers/functions"
+@import "helpers/mixins"
+@import "helpers/helpers"
+
+// Import Base
+@import "base/typography"
+
+// Import Layout
+@import "layout/base"
+@import "node_modules/foundation-sites/scss/components/flex"
+@import "node_modules/foundation-sites/scss/foundation"
+@include foundation-xy-grid-classes(
+    $base-grid: true,
+    $margin-grid: true,
+    $padding-grid: true,
+    $block-grid: true,
+    $collapse: true,
+    $offset: true,
+    $vertical-grid: true,
+    $frame-grid: true
+)
+@include foundation-flex-classes
+@include foundation-visibility-classes
+
+// Import Vendors
+@import "vendors/hamburgers/settings"
+@import "node_modules/hamburgers/_sass/hamburgers/hamburgers"
+@import "node_modules/choices.js/src/styles/choices"
+@import "node_modules/badger-accordion/dist/badger-accordion.css"
+@import "vendors/badger-accordion/custom"
+
+// Import Components
+@import "components/avatar"
+@import "components/badge"
+@import "components/breadcrumbs"
+@import "components/button"
+@import "components/checkbox"
+@import "components/dropdown"
+@import "components/horizontal-rule"
+@import "components/icon"
+@import "components/icons"
+@import "components/input"
+@import "components/form",
+@import "components/keyframes"
+@import "components/link"
+@import "components/list"
+@import "components/radio"
+@import "components/search"
+@import "components/select"
+@import "components/socials"
+@import "components/spinner"
+@import "components/subscribe-input"
+@import "components/textarea"
+// yo:update -- component
+
+// Import Modules
+@import "../_modules/footer/footer"
+@import "../_modules/header/header"
+@import "../_modules/header/dropdown"
+@import "../_modules/svg/svg"
+@import "../_modules/toggler/toggler"
+@import "../_modules/accordion/accordion"
+@import "../_modules/tabs/tabs"
+@import "../_modules/choices-select/choices-select"
+@import "../_modules/overlay/overlay"
+@import "../_modules/upload-btn/upload-btn"
+@import "../_modules/modal/modal"
+// yo:update -- module
+
+// Import Pages
+@import "pages/home/index"
+// yo:update -- page
+
+.yeogurt-info
+    text-align: center
+    max-width: 500px
+    margin-left: auto
+    margin-right: auto
+    img
+        margin: 0 auto
+
+.version
+    font-size: 14px
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+    position: absolute
+    bottom: 10px
+    right: 10px
+
+// Styling on warning for users on IE7 or below
+.browsehappy
+    text-align: center
+    margin: 0
+    background: #fff8e2
+    color: #000
+    padding: 0.5em 0

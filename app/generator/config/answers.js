@@ -28,7 +28,6 @@ const answersConfig = function answersConfig() {
     this.htmlOption = this.answers.htmlOption;
     this.jsFramework = this.answers.jsFramework;
     this.jsOption = this.answers.jsOption;
-    this.jsPreprocessor = this.answers.jsPreprocessor;
     this.cssOption = this.answers.cssOption;
     this.sassSyntax = this.answers.sassSyntax;
     this.cssReset = this.answers.cssReset;

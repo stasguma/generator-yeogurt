@@ -26,26 +26,12 @@ const clientPrompts = async function clientPrompts() {
         }
     }, {
         type: 'list',
-        name: 'jsPreprocessor',
-        message: 'What ' + 'JavaScript preprocessor'.blue + ' would you like to use?',
-        choices: ['ES6 (Using Babel)', 'None'],
-        filter: (val) => {
-            const filterMap = {
-                'ES6 (Using Babel)': 'es6',
-                'None': 'none'
-            };
-
-            return filterMap[val];
-        }
-    }, {
-        type: 'list',
         name: 'cssOption',
         message: 'What would you like to use to ' + 'write styles'.blue + '?',
-        choices: ['Sass', 'Less', 'Stylus'],
+        choices: ['Sass', 'Stylus'],
         filter: (val) => {
             const filterMap = {
                 'Sass': 'sass',
-                'Less': 'less',
                 'Stylus': 'stylus'
             };
 

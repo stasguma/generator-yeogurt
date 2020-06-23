@@ -16,15 +16,6 @@ npm install [package name] --save
 Once installed, you can access scripts within your JavaScript files like so:
 
 ```js
-// Example using jquery
-
-// ES5
-var $ = require('jquery');
-
-$(function() {
-  console.log('Hello');
-});
-
 // ES6
 import $ from 'jquery';
 

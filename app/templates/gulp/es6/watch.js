@@ -13,11 +13,7 @@ export default function(gulp, plugins, args, config, taskTarget, browserSync) {
             gulp.watch([
                 dirs.styles + '/**/*.{scss,sass}',
                 dirs.modules + '/**/*.{scss,sass}'
-            ], { cwd: path.join(dirs.source) }, gulp.series('sass'));<% } else if (cssOption === 'less') { %>
-            gulp.watch([
-                dirs.styles + '/**/*.less',
-                dirs.modules + '/**/*.less'
-            ], { cwd: path.join(dirs.source) }, gulp.series('less'));<% } else if (cssOption === 'stylus') { %>
+            ], { cwd: path.join(dirs.source) }, gulp.series('sass'));<% } else if (cssOption === 'stylus') { %>
             gulp.watch([
                 dirs.styles + '/**/*.styl',
                 dirs.modules + '/**/*.styl'

@@ -30,7 +30,6 @@ class ModuleGenerator extends Generator {
         // this.jsFramework = fileJSON.jsFramework;
         // this.singlePageApplication = fileJSON.singlePageApplication;
         // this.jsOption = fileJSON.jsOption;
-        this.jsPreprocessor = fileJSON.jsPreprocessor;
         // this.jsTemplate = fileJSON.jsTemplate;
         this.cssOption = fileJSON.cssOption;
         this.sassSyntax = fileJSON.sassSyntax;
@@ -44,6 +43,9 @@ class ModuleGenerator extends Generator {
         this.stylesDir = config ?
             path.join(directories.source, directories.styles) :
             'src/_styles';
+        this.scriptsDir = config ?
+            path.join(directories.source, directories.scripts) :
+            'src/_scripts';
     }
 
     ask() {
@@ -114,7 +116,7 @@ class ModuleGenerator extends Generator {
         }
 
         const htmlSuffix = (this.htmlOption === 'pug') ? '.pug' : '.nunjucks';
-        const jsSuffix = (this.jsPreprocessor === 'none') ? '.js' : '.es6.js';
+        const jsSuffix = '.es6.js';
         const cssSuffix = _getCssSuffix(this.cssOption, this.sassSyntax);
 
         this.moduleFiles.forEach((file) => {
@@ -149,12 +151,19 @@ class ModuleGenerator extends Generator {
 
         }
 
-        const replaceOptions = {
+        const replaceOptionsForStyles = {
             files: this.destinationPath(path.join(this.stylesDir, `main${cssSuffix}`)),
             from: '// yo:update -- module',
-            to: createUpdateStr(this.names, directories)
+            to: createUpdatedStyleStr(this.names, directories)
         };
-        replace(replaceOptions);
+        replace(replaceOptionsForStyles);
+
+        const replaceOptionsForScripts = {
+            files: this.destinationPath(path.join(this.scriptsDir, `main.js`)),
+            from: ['// yo:update -- moduleImport', '// yo:update -- moduleInit'],
+            to: createUpdatedScriptStr(this.names, directories)
+        };
+        replace(replaceOptionsForScripts);
 
         function _getCssSuffix(cssOption, sassSyntax) {
             const sassSuffix = `.${sassSyntax}`;
@@ -173,7 +182,7 @@ class ModuleGenerator extends Generator {
 
             return _result;
         }
-        function createUpdateStr(names, dirs) {
+        function createUpdatedStyleStr(names, dirs) {
             let updateStr = '';
 
             names.forEach((name, i, arr) => {
@@ -189,6 +198,28 @@ class ModuleGenerator extends Generator {
             });
 
             return updateStr;
+        }
+        function createUpdatedScriptStr(names, dirs) {
+            let updateImportStr = '';
+            let updateInitStr = '';
+
+            names.forEach((name, i, arr) => {
+                const filepath = name.toLowerCase();
+                const filename = path.parse(name).name;
+                const camelizedName = camelCase(filename);
+                const className = camelizedName.charAt(0).toUpperCase() + camelizedName.slice(1);
+                const updatePath = path.join('../', dirs.modules, filepath, filename);
+
+                updateImportStr += `import ${className} from '${slash(updatePath)}';\n`;
+                updateInitStr += `new ${className}();\n\t`;
+
+                if (i === arr.length - 1) {
+                    updateImportStr += '// yo:update -- moduleImport';
+                    updateInitStr += `// yo:update -- moduleInit`;
+                }
+            });
+
+            return [updateImportStr, updateInitStr];
         }
     }
 }

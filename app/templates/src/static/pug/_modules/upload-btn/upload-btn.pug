@@ -1,0 +1,14 @@
+mixin uploadBtn(spec)
+    - spec = spec || {}
+    - spec.title = spec.title || 'Загрузить'
+    - spec.accept = spec.accept || ''
+    - spec.multiple = spec.multiple || false
+    - spec.hint = spec.hint || ''
+    - spec.__class = spec.__class || ''
+
+    button.btn.btn-upload(type="button" class= "js-upload-btn" class=spec.__class)&attributes(attributes)
+        +icon-svg({id: 'clip', __class: 'btn-upload__icon'})
+        span.btn-upload__title(class= "js-upload-btn-title" data-default-title= spec.title)= spec.title
+        if spec.hint
+            span.btn-upload__hint= spec.hint
+        input(type="file" name="myfile" accept= spec.accept class= "js-upload-input" multiple= spec.multiple)

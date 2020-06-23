@@ -1,0 +1,34 @@
+// input:not([type="file"]),
+// input:not([type="color"]),
+input
+    outline: none
+    width: 100%
+    margin: 0
+    padding: 15px 16px
+    border: 1px solid $input-border-color
+    background-color: $c--white
+    color: $c--dark-gray
+    // @include font(mukta, 16px, 18px)
+    &:focus
+        border-color: $input-border-color-focus
+        transition: border-color .15s
+
+    &::placeholder
+        color: $input-placeholder-color
+    &[disabled]
+        background: #f3f3f3
+        opacity: .8
+
+// input[type="color"]
+    // display: none
+    // visibility: hidden
+    // opacity: 0
+    // &::-webkit-color-swatch-wrapper
+    //     padding: 0
+    // &::-webkit-color-swatch
+    //     border: none
+
+// input[type="file"]
+//     display: none
+//     opacity: 0
+//     visibility: hidden

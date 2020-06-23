@@ -1,0 +1,15 @@
+mixin accordion(spec)
+    - spec = spec || {}
+    - spec.__class = spec.__class || ''
+    - spec.data = spec.data || []
+    
+    dl.accordion.js-badger-accordion(class=spec.__class)
+        each item in spec.data
+            dt.accordion__header
+                button.accordion__trigger.js-badger-accordion-header
+                    .accordion__trigger-title= item.title
+                    +icon-svg({id: 'arrow-alt', __class: 'accordion__trigger-title-symbol'})
+            dd.accordion__panel.badger-accordion__panel.js-badger-accordion-panel.-ba-is-hidden
+                .accordion__panel-inner.js-badger-accordion-panel-inner
+                    each text in item.text
+                        p= text

@@ -1,0 +1,491 @@
+include ../_layouts/mixins
+
+//- Custom Configuration
+block config
+    //- Setup site's base URL to match the "baseUrl" key within `package.json`
+    //- Otherwise default to relative pathing
+    - var baseUrl = config.baseUrl || './'
+
+doctype html
+<html class='no-js' lang='en'>
+
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+    block title
+        title UI Style Guide
+    meta(name='description' content= 'A new Yeogurt application')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    block stylesheets
+        link(rel='stylesheet' href= baseUrl + 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap')
+        link(rel='stylesheet' href= baseUrl + 'styles/main.css')
+        link(rel='stylesheet' href= baseUrl + 'styles/main-styleguide.css')
+
+body
+    <!--[if lt IE 11]>
+    <p class='browsehappy'>You are using an <strong>outdated</strong> browser. Please <a href='http://browsehappy.com/'>upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    .grid-x
+        aside.sg-sidebar
+            +img-svg({id: 'logo', __class: 'sg-sidebar__logo'})
+            
+            .sg-sidebar__main-title.sg-montserrat-l UI StyleGuide
+            .sg-sidebar__main-subtitle.sg-montserrat-sb Phase 1.0
+            
+            nav.sg-sidebar__navigation
+                .sg-sidebar__title.sg-montserrat-l Design Elements 
+                ul.sg-sidebar__list
+                    li.sg-sidebar__item
+                        a.sg-sidebar__link(data-scroll-to="colours") Colours
+                    li.sg-sidebar__item
+                        a.sg-sidebar__link(data-scroll-to="typography") Typography
+                    li.sg-sidebar__item
+                        a.sg-sidebar__link(data-scroll-to="form-elements") Form elements
+                    li.sg-sidebar__item
+                        a.sg-sidebar__link(data-scroll-to="buttons") Buttons
+                    li.sg-sidebar__item
+                        a.sg-sidebar__link(data-scroll-to="links") Links
+            
+        main.sg-main-content
+            section#colours.sg-section
+                .sg-heading Colours
+                .sg-sub-section
+                    h3.sg-sub-heading Primary palette
+                    .grid-x.grid-margin-x
+                        .cell.shrink
+                            .sg-color-card
+                                .sg-color-card__header(style="background-color:red")
+                                .sg-color-card__info
+                                    .sg-color-card__name Red
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                        .cell.shrink
+                            .sg-color-card
+                                .sg-color-card__header(style="background-color:blue")
+                                .sg-color-card__info
+                                    .sg-color-card__name Blue
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                                    
+                .sg-sub-section
+                    h3.sg-sub-heading Secondary palette
+                    .grid-x.grid-margin-x
+                        .cell.shrink
+                            .sg-color-card
+                                .sg-color-card__header(style="background-color:red")
+                                .sg-color-card__info
+                                    .sg-color-card__name Red
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                        .cell.shrink
+                            .sg-color-card
+                                .sg-color-card__header(style="background-color:blue")
+                                .sg-color-card__info
+                                    .sg-color-card__name Blue
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                                    
+                .sg-sub-section
+                    h3.sg-sub-heading Gradients palette
+                    .grid-x.grid-margin-x
+                        .cell.shrink
+                            .sg-color-card.sg-color-card--wider
+                                .sg-color-card__header(style="background: linear-gradient(90deg, red 0%, blue 100%);")
+                                .sg-color-card__info
+                                    .sg-color-card__name Red
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                                    
+                        .cell.shrink
+                            .sg-color-card.sg-color-card--wider
+                                .sg-color-card__header(style="background: linear-gradient(90deg, red 0%, blue 100%);")
+                                .sg-color-card__info
+                                    .sg-color-card__name Red
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                                    .sg-color-card__hex #122345
+                                    .sg-color-card__rgb RGB - 36.123.20
+                                    
+                .sg-sub-section
+                    h3.sg-sub-heading Shades
+                    .sg-shade-section
+                        .sg-shade-card
+                            .grid-x.align-middle
+                                .cell.medium-3
+                                    .sg-shade-card__color(style="background-color: #122345;")
+                                .cell.medium-5
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Hex
+                                        .sg-shade-card__text #122345
+                                .cell.medium-4
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Rgb
+                                        .sg-shade-card__text RGB: 36.123.20
+                                        
+                        .sg-shade-card
+                            .grid-x.align-middle
+                                .cell.medium-3
+                                    .sg-shade-card__color(style="background-color: #122345;")
+                                .cell.medium-5
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Hex
+                                        .sg-shade-card__text #122345
+                                .cell.medium-4
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Rgb
+                                        .sg-shade-card__text RGB: 36.123.20
+                                        
+                    .sg-shade-section
+                        .sg-shade-card
+                            .grid-x.align-middle
+                                .cell.medium-3
+                                    .sg-shade-card__color(style="background-color: #122345;")
+                                .cell.medium-5
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Hex
+                                        .sg-shade-card__text #122345
+                                .cell.medium-4
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Rgb
+                                        .sg-shade-card__text RGB: 36.123.20
+                    
+                        .sg-shade-card
+                            .grid-x.align-middle
+                                .cell.medium-3
+                                    .sg-shade-card__color(style="background-color: #122345;")
+                                .cell.medium-5
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Hex
+                                        .sg-shade-card__text #122345
+                                .cell.medium-4
+                                    .grid-x.align-middle
+                                        .sg-shade-card__tag Rgb
+                                        .sg-shade-card__text RGB: 36.123.20
+                    
+            section#typography.sg-section
+                .sg-heading Typography
+                .sg-sub-section
+                    .grid-x.align-justify
+                        .cell.medium-2
+                            .sg-font-card
+                                .sg-font-card__letter Aa
+                                .sg-font-card__divider
+                                .sg-font-card__name Montserrat
+                            .sg-font-weights
+                                .sg-font-weights__name Light
+                                .sg-font-weights__name Regular
+                                .sg-font-weights__name Medium
+                                .sg-font-weights__name Bold
+                                
+                        .cell.medium-9
+                            .sg-heading-row
+                                h3.sg-sub-heading Mobile
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h1 - 31 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h2 - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h3 - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h4 - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size Body - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size Body small - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size Body tiny - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        
+                .sg-sub-section
+                    .grid-x.align-justify
+                        .cell.medium-2
+                        .cell.medium-9
+                            .sg-heading-row
+                                h3.sg-sub-heading Desktop
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h1 - 31 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h2 - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h3 - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size h4 - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size Body - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size Body small - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                    
+                            .sg-heading-row
+                                .grid-x
+                                    .cell.medium-4
+                                        .sg-heading-size Body tiny - 24 px
+                                    .cell.auto
+                                        .heading-1.sg-heading-text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                
+            section#form-elements.sg-section
+                .sg-heading Form Elements
+                .sg-sub-section
+                    h3.sg-sub-heading Inputs
+                    .grid-x.medium-up-4.grid-margin-x
+                        .cell
+                            .form
+                                .form__row
+                                    .form__item
+                                        .form-label.form__label
+                                            label(for= "input1") Label
+                                        .form-input
+                                            input#input1(type='text' placeholder="Placeholder")
+                                        
+                                .form__row
+                                    .form__item.has-error
+                                        .form-label.form__label
+                                            label(for= "input2") Label
+                                        .form-input
+                                            //- +icon-svg({id: 'cross', __class: 'icon'})
+                                            input#input2(type='text' placeholder="Placeholder")
+                                        .form__error-text Это поле обязательно к заполнению
+                                .form__row
+                                    .form__item
+                                        .form-label.form__label
+                                            label Label
+                                        .form-input
+                                            //- +icon-svg({id: 'cross', __class: 'icon'})
+                                            input(type='text' placeholder="Placeholder" disabled)
+                                            
+                        .cell
+                            .form
+                                .form__row
+                                    .form__item
+                                        .form-label.form__label
+                                            label(for= "input1") Label
+                                        .form-input
+                                            input#input1(type='text' placeholder="Placeholder")
+                                        .form__hint Подсказка
+                                        
+                                .form__row
+                                    .form__item.has-error
+                                        .form-label.form__label
+                                            label(for= "input2") Label
+                                        .form-input
+                                            //- +icon-svg({id: 'cross', __class: 'icon'})
+                                            input#input2(type='text' placeholder="Placeholder")
+                                        .form__hint Подсказка
+                                        .form__error-text Это поле обязательно к заполнению
+                                .form__row
+                                    .form__item
+                                        .form-label.form__label
+                                            label Label
+                                        .form-input
+                                            //- +icon-svg({id: 'cross', __class: 'icon'})
+                                            input(type='text' placeholder="Placeholder" disabled)
+                                        .form__hint Подсказка
+                
+                .sg-sub-section
+                    h3.sg-sub-heading Textarea
+                    .grid-x.medium-up-4.grid-margin-x
+                        .cell
+                            .form
+                                .form__row
+                                    .form__item
+                                        .form-label.form__label
+                                            label(for= "textarea1") Label
+                                        .form-input
+                                            textarea#textarea1(placeholder="Placeholder")
+                                                
+                .sg-sub-section
+                    h3.sg-sub-heading Selects
+                    .grid-x.medium-up-4.grid-margin-x
+                        .cell
+                            .form
+                                .form__item
+                                    .form-label.form__label
+                                        label(for= "in3") Custom
+                                    select#in3.choices-select(name='english')
+                                        option(value='1') Elementary
+                                        option(value='2') Intermediate
+                                        option(value='3') Advanced
+                                        option(value='4') Native
+                        .cell
+                            .form
+                                .form__item
+                                    .form-label.form__label
+                                        label(for= "in4") Native
+                                    select#in4(name='english')
+                                        option(value='1') Elementary
+                                        option(value='2') Intermediate
+                                        option(value='3') Advanced
+                                        option(value='4') Native
+                                                
+                .sg-sub-section
+                    .grid-x.medium-up-4.grid-margin-x
+                        .cell
+                            .sg-sub-section
+                                h3.sg-sub-heading Checkboxes
+                                .form
+                                    .form__row
+                                        .checkbox
+                                            input(type="checkbox" id="cb1" name="cb" checked)
+                                            label.checkbox__wrapper(for="cb1")
+                                                span.checkbox__check
+                                                span.checkbox__text Remember me
+                                    .form__row            
+                                        .checkbox
+                                            input(type="checkbox" id="cb2" name="cb")
+                                            label.checkbox__wrapper(for="cb2")
+                                                span.checkbox__check
+                                                span.checkbox__text Dont remember me
+                                    .form__row            
+                                        .checkbox
+                                            input(type="checkbox" id="cbd" name="cb" disabled)
+                                            label.checkbox__wrapper(for="cbd")
+                                                span.checkbox__check
+                                                span.checkbox__text Disabled
+                                        
+                                                    
+                        .cell
+                            .sg-sub-section
+                                h3.sg-sub-heading Radio
+                                .form
+                                    .form__row
+                                        span.radio
+                                            input(id="rad" type="radio" name="radio" checked)
+                                            label.radio__wrapper(for="rad")
+                                                span.radio__circle
+                                                    span.radio__inner
+                                                span.radio__text Radio
+                                                
+                                    .form__row
+                                        span.radio
+                                            input(id="rad2" type="radio" name="radio")
+                                            label.radio__wrapper(for="rad2")
+                                                span.radio__circle
+                                                    span.radio__inner
+                                                span.radio__text Radio
+                                                
+                                    .form__row
+                                        span.radio
+                                            input(id="rad3" type="radio" name="radio" disabled)
+                                            label.radio__wrapper(for="rad3")
+                                                span.radio__circle
+                                                    span.radio__inner
+                                                span.radio__text Disabled
+                            
+            section#buttons.sg-section
+                .sg-heading Buttons
+                .sg-sub-section
+                    .grid-x.medium-up-4.grid-margin-x
+                        .cell
+                            h3.sg-sub-heading Primary
+                            .grid-y.grid-margin-y
+                                .cell
+                                    button.btn.btn-primary Button
+                                .cell
+                                    button.btn.btn-primary(disabled) Button
+                                        
+                        .cell
+                            h3.sg-sub-heading Secondary
+                            .grid-y.grid-margin-y
+                                .cell
+                                    button.btn.btn-secondary Button
+                                .cell
+                                    button.btn.btn-secondary(disabled) Button
+                
+                .sg-sub-section
+                    .grid-x.medium-up-4.grid-margin-x
+                        .cell
+                            h3.sg-sub-heading Primary sizes
+                            .grid-y.grid-margin-y
+                                .cell
+                                    button.btn.btn-primary Button
+                                .cell
+                                    button.btn.btn-primary Button
+                                .cell
+                                    button.btn.btn-primary Button
+                                    
+                        .cell
+                            h3.sg-sub-heading Secondary sizes
+                            .grid-y.grid-margin-y
+                                .cell
+                                    button.btn.btn-secondary Button
+                                .cell
+                                    button.btn.btn-secondary Button
+                                .cell
+                                    button.btn.btn-secondary Button
+    
+            section#links.sg-section
+                .sg-heading Links
+                .sg-sub-section
+                    .grid-x.medium-up-4.grid-margin-x
+                        .cell
+                            a.link(href= "#link") Loooooooong link
+
+
+    block scripts
+        script(src= baseUrl + 'scripts/main.js' defer)
+
+</html>

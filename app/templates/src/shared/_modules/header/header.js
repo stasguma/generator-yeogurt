@@ -1,9 +1,12 @@
-'use strict';
+export default class Header {
+    constructor() {
+        this.name = 'header';
+        console.log('%s module', this.name.toLowerCase());
 
-// Constructor
-var Header = function() {
-    this.name = 'Header';
-    console.log('%s module', this.name);
-};
+        this.init();
+    }
 
-module.exports = Header;
+    init() {
+
+    }
+}

@@ -1,33 +1,39 @@
-var BadgerAccordion = require('badger-accordion');
+export default class Tabs {
+    constructor() {
+        this.name = 'tabs';
+        console.log('%s module', this.name.toLowerCase());
 
-'use strict';
+        this.menuElements = document.querySelectorAll('[data-tab]');
 
-// Constructor
-var Tabs = function(selector) {
-    this.name = 'Tabs';
-    console.log('%s module', this.name);
+        this.init();
+    }
 
-    this.accordionEls = document.querySelectorAll(selector);
-};
+    init() {
+        this.bindEvents();
+    }
 
-Tabs.prototype.init = function () {
-    this.initAccordion();
+    bindEvents() {
+        this.menuElements.length &&
+            this.menuElements.forEach(el => {
+                el.addEventListener('click', this.onChange.bind(this));
+            });
+    }
 
-    return this;
-};
-
-Tabs.prototype.initAccordion = function () {
-    if (!this.accordionEls) { return; }
-
-    for (var i = 0; i < this.accordionEls.length; i++) {
-        var accordion = this.accordionEls[i];
-
-        new BadgerAccordion(accordion, {
-            openMultiplePanels: true
+    clear() {
+        this.menuElements.forEach(el => {
+            el.parentElement.classList.remove('is-active');
+            const id = el.getAttribute('data-tab');
+            document.getElementById(id).classList.remove('is-active');
         });
     }
 
-    return this;
-};
+    onChange({ target, currentTarget }) {
+        event.preventDefault();
 
-module.exports = Tabs;
+        this.clear();
+        target.parentElement.classList.add('is-active');
+        const id = currentTarget.getAttribute('data-tab');
+        const contentEl = document.getElementById(id);
+        contentEl.classList.add('is-active');
+    }
+}

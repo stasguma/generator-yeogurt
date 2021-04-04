@@ -1,24 +1,23 @@
 .btn
 	display: inline-block
-	padding: 0
-	border: none
-	outline: none
-	cursor: pointer
-	background: none
-	text-align: center
-	text-decoration: none
+    border: none
+    padding: 0
+    margin: 0
+    text-decoration: none
+    background: transparent
+    cursor: pointer
+    text-align: center
+    appearance: none
 
 .btn-primary
 	min-width: 210px
-	padding: 8px 18px
-	border-radius: 10px
+	padding: 1rem 2rem
 	background-color: $black
     color: $c--white
 	text-transform: uppercase
     // @include font(mukta, 17px, 34px)
-    transition: .3s
 	@include mq(desktop)
-		padding: 10px 18px
+		// padding: 10px 18px
 		// @include font(mukta, 23px, 35px)
     &:hover,
 	&:focus
@@ -29,14 +28,12 @@
 		user-select: none
 
 .btn-secondary
-	padding: 6px 18px
-	border-radius: 5px
+	padding: 1rem 2rem
 	background-color: transparent
 	color: $c--dark-gray
 	border: 1px solid $c--dark-gray
 	text-transform: uppercase
 	// @include font(mukta, 15px, 35px)
-	transition: .3s
 	&:hover,
 	&:focus
 		background-color: $c--dark-gray
@@ -48,33 +45,6 @@
 		user-select: none
 
 .btn-tertiary
-	padding: 10px 18px
-	border-radius: 30px
-	background-color: $black
-	color: $c--white
-	// @include font(hel-light, 15px)
-	text-transform: uppercase
-	transition: .3s
-	&:hover,
-	&:focus
-		background-color: lighten($black, 2.38%)
-		color: $c--white
-	&[disabled]
-		cursor: not-allowed
-		user-select: none
-		opacity: .6
-		&:hover,
-		&:focus
-			background-color: $black
-			color: $c--white
-
-.btn-empty
-
-	&:hover,
-	&:focus
-
-	&[disabled]
-
 
 .btn-close
 	width: 16px

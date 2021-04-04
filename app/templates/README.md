@@ -20,8 +20,7 @@ Testing
 - [Mocha](http://mochajs.org/)<% } %><% } %>
 
 Styles<% if (cssOption === 'sass') { %>
-- [Sass](http://sass-lang.com/) via ([node-sass](https://github.com/sass/node-sass))<% } else if (cssOption === 'stylus') { %>
-- [Stylus](https://learnboost.github.io/stylus/)<% } %>
+- [Sass](http://sass-lang.com/) via ([node-sass](https://github.com/sass/node-sass))<% } %>
 
 Markup<% if (htmlOption === 'pug') { %>
 - [Pug](https://pugjs.org/)<% } else if (htmlOption === 'nunjucks') { %>

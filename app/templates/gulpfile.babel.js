@@ -49,8 +49,7 @@ gulp.task('build', gulp.series(
     'svg-img-sprite'<% if (htmlOption === 'pug') { %>,
     'pug'<% } else if (htmlOption === 'nunjucks') {  %>,
     'nunjucks'<% } %><% if (cssOption === 'sass') { %>,
-    'sass'<% } else if (cssOption === 'stylus') { %>,
-    'stylus'<% } %>,
+    'sass'<% } %>,
     'browserify'
 ));
 
@@ -63,8 +62,7 @@ gulp.task('serve', gulp.series(
         'copy'<% if (htmlOption === 'pug') { %>,
         'pug'<% } else if (htmlOption === 'nunjucks') {  %>,
         'nunjucks'<% } %><% if (cssOption === 'sass') { %>,
-        'sass'<% } else if (cssOption === 'stylus') { %>,
-        'stylus'<% } %>,
+        'sass'<% } %>,
         'browserify'
     ),
     gulp.parallel(

@@ -17,7 +17,7 @@ head
     meta(name='description' content= 'A new Yeogurt application')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     block stylesheets
-        link(rel='stylesheet' href= baseUrl + 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap')
         link(rel='stylesheet' href= baseUrl + 'styles/main.css')
         link(rel='stylesheet' href= baseUrl + 'styles/main-styleguide.css')
 
@@ -389,23 +389,25 @@ body
                                 .form
                                     .form__row
                                         .checkbox
-                                            input(type="checkbox" id="cb1" name="cb" checked)
-                                            label.checkbox__wrapper(for="cb1")
-                                                span.checkbox__check
+                                            input#cb1.checkbox__input(type='checkbox' name="cb" checked)
+                                            label.checkbox__label(for='cb1')
+                                                span.checkbox__box
+                                                    +icon-svg({id: 'check', __class: 'checkbox__svg'})
                                                 span.checkbox__text Remember me
                                     .form__row            
                                         .checkbox
-                                            input(type="checkbox" id="cb2" name="cb")
-                                            label.checkbox__wrapper(for="cb2")
-                                                span.checkbox__check
+                                            input#cb2.checkbox__input(type='checkbox' name="cb")
+                                            label.checkbox__label(for='cb2')
+                                                span.checkbox__box
+                                                    +icon-svg({id: 'check', __class: 'checkbox__svg'})
                                                 span.checkbox__text Dont remember me
                                     .form__row            
                                         .checkbox
-                                            input(type="checkbox" id="cbd" name="cb" disabled)
-                                            label.checkbox__wrapper(for="cbd")
-                                                span.checkbox__check
+                                            input#cb3.checkbox__input(type='checkbox' name="cb" disabled)
+                                            label.checkbox__label(for='cb3')
+                                                span.checkbox__box
+                                                    +icon-svg({id: 'check', __class: 'checkbox__svg'})
                                                 span.checkbox__text Disabled
-                                        
                                                     
                         .cell
                             .sg-sub-section

@@ -31,6 +31,15 @@ img {
 	@include object-fit(cover);
 }
 
+a {
+	text-decoration: none;
+}
+
+svg {
+	width: 100%;
+	height: 100%;
+}
+
 .main-content {
 	flex: 1 0 auto;
 }
@@ -38,7 +47,4 @@ img {
 .section {
 	position: relative;
 	padding: 70px 0;
-	@include mq(desktop) {
-		padding: 110px 0;
-	};
 }

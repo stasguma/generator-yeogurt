@@ -1,6 +1,12 @@
-$checkbox-border-color: $c--light-gray;
+$checkbox-width: 18px;
+$checkbox-height: 18px;
+$checkbox-border-radius: 4px;
+$checkbox-check-width: 100%;
+$checkbox-check-height: 60%;
+$checkbox-text-color: $c--black;
+$checkbox-border-color: #CCCFDB;
 $checkbox-border-color-hover: $c--green;
-$checkbox-border-color-checked: $c--light-gray;
-$checkbox-border-color-checked-hover: $c--light-gray;
+$checkbox-border-color-checked: $checkbox-border-color-hover;
 $checkbox-bg-color: $c--white;
-$checkbox-check-color: $c--green;
+$checkbox-checked-bg-color: $c--green;
+$checkbox-check-color: $c--white;

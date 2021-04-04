@@ -51,7 +51,7 @@ config.sort((a, b) => a.index - b.index);
 // and the code becomes the value
 config.forEach(item => tasks[item.name] = item.code);
 
-module.exports = class YeogurtGenerator extends Generator {
+module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
 
@@ -72,8 +72,6 @@ module.exports = class YeogurtGenerator extends Generator {
         //     YeogurtGenerator.prototype[method] = tasks[method];
         // }
         Object.assign(YeogurtGenerator.prototype, tasks);
-
-        // console.log('YeogurtGenerator.prototype: ', YeogurtGenerator.prototype);
     }
 
 };

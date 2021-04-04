@@ -1,100 +1,69 @@
-/*
-<div class="checkbox">
-    <input type="checkbox" id="cb" name="cb" />
-    <label for="cb" class="checkbox__wrapper">
-        <span class="checkbox__check"></span>
-        <span class="checkbox__text">Text</span>
-    </label>
-</div>
-*/
+// /*
+// .checkbox
+//     input#chbx.checkbox__input(type='checkbox')
+//     label.checkbox__label(for='chbx')
+//         span.checkbox__box
+//         span.checkbox__text Remember me
+// */
 
-// Create animation called 'check'
-@keyframes check
-    0%
-        height: 0
-        width: 0
-    25%
-        height: 0
-        width: 40%
-    50%
-        height: 70%
-        width: 40%
-
-// Create the backgrounds for the checkboxes
 .checkbox
     display: inline-flex
     flex-flow: row nowrap
-    &__text
-        cursor: pointer
-        color: $c--dark-gray
-        // @include font(mukta, 16px, 18px)
-
-    &__wrapper
+    &__input
+        position: absolute
+        visibility: hidden
+        &:checked + .checkbox__label
+            .checkbox__box
+                background-color: $checkbox-checked-bg-color
+                border-color: $checkbox-border-color-checked
+                animation: wave .4s ease
+            .checkbox__svg
+                stroke-dashoffset: 0
+    &__label
         display: flex
-
-    // This label functions as actual clickable area, because the default checkbox is rubbish
-    &__check
-        position: relative
-        height: 20px
-        width: 20px
-        flex: 0 0 auto
-        margin-right: 8px
-        border: 2px solid $input-border-color
-        border-radius: 1px
+        -webkit-user-select: none
+        user-select: none
         cursor: pointer
-        background-color: $c--white
-        transition: border-color .2s
-        @include mq(desktop)
-            margin-right: 14px
+        padding: 6px 8px
+        border-radius: 6px
+        overflow: hidden
+        transition: all .2s ease
+        &:hover
+            background-color: rgba(blue, .06)
 
-        // This is the pseudo-element for the check mark
-        &::after
-            // The borders
-            border-right: 2px solid transparent
-            border-top: 2px solid transparent
+            .checkbox__box
+                border-color: $checkbox-border-color-hover
+    &__box
+        display: flex
+        align-items: center
+        justify-content: center
+        transform: translate3d(0,0,0)
 
-            // Positioning and stuff
-            @include pseudo()
-            // top: 40%
-            // left: 50%
-            top: 52%
-            left: 15%
-            // right: 0
-            width: 40%
-            height: 70%
+        width: $checkbox-width
+        height: $checkbox-height
+        border-radius: $checkbox-border-radius
+        background-color: $checkbox-bg-color
+        transform: scale(1)
+        border: 1px solid $checkbox-border-color
+        transition: .2s ease
+        box-shadow: 0 1px 1px rgba(#00104B, .05)
+    &__text
+        padding-left: 8px
+        color: $checkbox-text-color
+    &__svg
+        width: $checkbox-check-width
+        height: $checkbox-check-height
+        fill: none
+        stroke: $checkbox-check-color
+        stroke-width: 2
+        stroke-linecap: round
+        stroke-linejoin: round
+        stroke-dasharray: 16px
+        stroke-dashoffset: 16px
+        transition: all .3s ease
+        transition-delay: .1s
+        transform: translate3d(0,0,0)
 
-            /*
-            This element has a border on the right, and top. By rotating it looks like a check symbol, but the wrong way. That's why I'm flipping it with scaleX(-1)
-            */
-            transform: scaleX(-1) rotate(180deg + -45deg)
-            // transform: scaleX(-1) rotate(180deg + -45deg) translate(-50%, -50%)
-
-            /*
-            I want to position the symbol using the left top, because when increasing the width and height of an object, it expands from the top left corner as well. That is what makes it looks like it's being drawn.
-            */
-            transform-origin: top left
-
-    // Hide the input!
-    input display: none
-
-    // When the input is checked (by clicking the label), I wan't the animation to run and the colour to change.
-    input
-        &:not(:checked) + .checkbox__wrapper
-            .checkbox__check
-                &:hover
-                    border-color: $c--soft-black
-
-        &:checked + .checkbox__wrapper
-            .checkbox__check::after
-                animation: check 0.3s
-                border-color: $c--soft-black
-
-    // Options for the alternative checkbox
-    &.checkbox-alt
-        // The alternative checkbox must animate infinitely when I hover
-        .checkbox__check:hover::after
-            animation: check 0.6s ease infinite
-
-        // When it's checked, dont bother animating
-        input:checked + .checkbox__check::after
-            animation: none
+@keyframes wave
+    50%
+        transform: scale(.9)

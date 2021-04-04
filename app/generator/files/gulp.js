@@ -29,9 +29,6 @@ const gulpFiles = function gulpFiles() {
     if (this.cssOption === 'sass') {
         templates.push({ from: 'gulp/es6/sass.js', to: 'gulp/sass.js'});
     }
-    if (this.cssOption === 'stylus') {
-        templates.push({ from: 'gulp/es6/stylus.js', to: 'gulp/stylus.js'});
-    }
 
     for (let file of templates) {
         this.fs.copyTpl(

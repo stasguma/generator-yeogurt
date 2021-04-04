@@ -28,11 +28,10 @@ const clientPrompts = async function clientPrompts() {
         type: 'list',
         name: 'cssOption',
         message: 'What would you like to use to ' + 'write styles'.blue + '?',
-        choices: ['Sass', 'Stylus'],
+        choices: ['Sass'],
         filter: (val) => {
             const filterMap = {
-                'Sass': 'sass',
-                'Stylus': 'stylus'
+                'Sass': 'sass'
             };
 
             return filterMap[val];

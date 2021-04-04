@@ -13,7 +13,8 @@ $bps: (
     "tablet":       768px,
     "tablet-wide":  1024px,
     "desktop":      1200px,
-    "desktop-wide": 1440px
+    "desktop-wide": 1440px,
+	"desktop-fhd":  1920px
 )
 @mixin mq($width, $type: min) {
     @if map_has_key($bps, $width) {
@@ -30,7 +31,6 @@ $bps: (
 // if you have problem with vertical align placeholder on safari
 // https://stackoverflow.com/questions/9323596/placeholder-text-is-not-vertically-centered-in-safari
 @mixin font($name, $size: null, $line-height: null) {
-
 	@if $size {
 		@if $name == sarabun {
 			@if $line-height {
@@ -44,37 +44,10 @@ $bps: (
 			} @else {
 				font: 600 rem($size) "Sarabun", sans-serif
 			}
-		} @else if $name == mukta {
-			@if $line-height {
-				font: 400 rem($size)#{"/"} lh($size, $line-height) "Mukta", sans-serif
-			} @else {
-				font: 400 rem($size) "Mukta", sans-serif
-			}
-		} @else if $name == mukta-medium {
-			@if $line-height {
-				font: 500 rem($size)#{"/"} lh($size, $line-height) "Mukta", sans-serif
-			} @else {
-				font: 500 rem($size) "Mukta", sans-serif
-			}
-		} @else if $name == mukta-bold {
-			@if $line-height {
-				font: 700 rem($size)#{"/"} lh($size, $line-height) "Mukta", sans-serif
-			} @else {
-				font: 700 rem($size) "Mukta", sans-serif
-			}
-		} @else {
-			@if $line-height {
-				font: 400 rem($size)#{"/"} lh($size, $line-height) $name
-			} @else {
-				font: 700 rem($size) "Mukta", sans-serif
-			}
-
 		}
 	} @else {
 		@if $name == sarabun {
 			font-family: "Sarabun", sans-serif
-		} @else if $name == mukta {
-			font-family: "Mukta", sans-serif
 		} @else {
 			font-family: $name
 		}

@@ -57,8 +57,7 @@
         "imagemin-svgo": "~7.0.0",
         "imagemin-pngquant": "~8.0.0",
         "gulp-eslint": "~5.0.0",<% if (cssOption === 'sass') { %>
-        "gulp-sass": "~4.0.2",<% } %><% if (cssOption === 'stylus') { %>
-        "gulp-stylus": "~2.7.0",<% } %>
+        "gulp-sass": "~4.0.2",<% } %>
         "js-yaml": "~3.13.1",
         "watchify": "~3.11.1 ",
         "browserify" : "~16.2.3"<% if (testFramework !== 'none') { %>,
@@ -111,8 +110,7 @@
         "//": "Entry files",
         "entries": {
             "js": "main**.js"<% if (cssOption === 'sass') { %>,
-            "css": "main**.{sass,scss}"<% } else if (cssOption === 'stylus') { %>,
-            "css": "main**.styl"<% } %> <% if (htmlOption === 'pug') { %>,
+            "css": "main**.{sass,scss}"<% } %> <% if (htmlOption === 'pug') { %>,
             "html": "**/*.pug"<% } else if (htmlOption === 'nunjucks') { %>,
             "html": "**/*.nunjucks"<% } %>,
             "image": "**/*.{jpg,jpeg,gif,svg,png}"

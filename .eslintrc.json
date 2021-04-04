@@ -1,0 +1,15 @@
+{
+  "parser": "@babel/eslint-parser",
+  "extends": "eslint:recommended",
+  "plugins": ["@babel"],
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "rules": {
+  }
+}
